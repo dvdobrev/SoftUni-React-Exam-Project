@@ -1,0 +1,42 @@
+@media (max-width: 992px) {
+
+    .main-banner .caption h2 {
+        font-size: 64px;
+    }
+
+    #features {
+        margin-bottom: 110px;
+    }
+
+    #features .feature-item {
+        margin-bottom: 30px;
+    }
+
+    #our-classes .tabs-content {
+        margin-left: 0px;
+        margin-top: 30px;
+    }
+
+    .trainer-item {
+        margin-bottom: 30px;
+    }
+
+    #contact-us #map {
+        margin-bottom: -7px;
+    }
+
+    #contact-us .contact-form {
+        padding: 30px;
+    }
+
+    #contact-us .contact-form #contact {
+        padding: 30px;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .feature-item .right-content a.text-button {
+        margin-left: 130px;
+    }
+}
