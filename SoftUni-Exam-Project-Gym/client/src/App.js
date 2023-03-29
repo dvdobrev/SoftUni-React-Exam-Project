@@ -1,32 +1,40 @@
-import { Routes, Route } from 'react-router-dom';
-import { useState } from "react";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
 
 import { UserContext } from './contexts/UserContext';
+
+import * as traingPlanService from './services/trainingPlanService';
+
+import {useLocalStorage} from './hooks/useLocalStorage';
 
 import { Header } from './components/Header';
 import { MainBanner } from './components/MainBanner';
 import { CallToAction } from './components/CallToAction';
 import { Testimonials } from './components/TestImonials';
 import { ContakUsArea } from './components/ContaktUsArea';
-import { Footer } from './components/Footer';
 import { Classes } from "./components/Classes";
 import { Schedules } from "./components/Schedules";
 import { Programs } from "./components/Programs";
-import { SignUp } from "./components/SignUp";
-import { Login } from "./components/Login";
 import { MySchedules } from './components/MySchedules';
-import { MyTrainingPlan } from './components/MyTrainingPlan';
+import { UsersTrainingCatalog } from './components/UsersTrainingCatalog';
 import { SocialMedia } from './components/SocialMedia';
 import { PageNotFound } from './components/PageNotFound';
 import { Test } from './components/Test';
+import { Footer } from './components/Footer';
+
+import { SignUp } from "./components/SignUp";
+import { Login } from "./components/Login";
 import { Logout } from './components/Logout';
 
-
-const baseUrl = "http://127.0.0.1:3005/";
+import { CreatePlan } from "./components/CreatePlan/CreatePlan";
 
 function App() {
 
-    const [userData, setUserData] = useState({});
+    const [trainingPlans, setTrainingPlans] = useState([]);
+
+    const [userData, setUserData] = useLocalStorage('userData', {});
+    const navigate = useNavigate();
+
 
     const loginHandler = (userData) => {
         setUserData(userData);
@@ -36,20 +44,24 @@ function App() {
         setUserData({});
     };
 
-    // const [users, setUsers] = useState([]);
+    useEffect(() => {
+        traingPlanService.getAll()
+            .then(result => {
+                setTrainingPlans(result);
+            });
+    }, []);
 
-    // useEffect(() => {
-    //     fetch(`${baseUrl}/users`)
-    //     .then(response => response.json())  
-    //     .then(result => {
-    //         setUsers(result.users);
-    //     })
-    // }, []);
+    const addPlan = (planData) => {
+        setTrainingPlans(state => [
+            ...state,
+            planData,
+        ]);
+        navigate('/usersTrainingCatalog');
 
-    // console.log(users);
-    // if(users.length > 0){
-    //     console.log(users[0].email);
-    // }
+    };
+
+    console.log(trainingPlans);
+
 
     //TODO: remove the unnecessary code
     return (
@@ -70,7 +82,16 @@ function App() {
         //     <Footer /> */}
         // </div>
 
-        <UserContext.Provider value={{userData, loginHandler, logoutHandler}}>
+        <UserContext.Provider
+            value={{
+                userData,
+                loginHandler,
+                logoutHandler,
+                trainingPlans,
+                addPlan
+            }}
+        >
+
             <div className="App">
                 <Header />
                 <Routes>
@@ -87,12 +108,16 @@ function App() {
                     <Route path="/schedules" element={<Schedules />} />
                     <Route path="/contact" element={<ContakUsArea />} />
                     <Route path="/mySchedules" element={<MySchedules />} />
-                    <Route path="/myTrainingPlan" element={<MyTrainingPlan />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signUp" element={<SignUp />} />
+                    <Route path="/usersTrainingCatalog" element={<UsersTrainingCatalog trainingPlans={trainingPlans} />} />
                     <Route path="/socialMedia" element={<SocialMedia />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />
+                    <Route path="/createPlan" element={<CreatePlan />} />
+
+
+
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signUp" element={<SignUp />} />
                     <Route path="/logout" element={<Logout />} />
 
                     {/* <Route path="/pricing/*" element={<Pricing />} />

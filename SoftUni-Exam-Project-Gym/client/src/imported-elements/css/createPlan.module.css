@@ -1,0 +1,13 @@
+.createPlan {
+    background-color: brown;    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.submitBtn {
+    background-color: aquamarine;
+
+}

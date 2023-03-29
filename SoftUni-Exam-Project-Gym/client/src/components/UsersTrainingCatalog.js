@@ -1,4 +1,9 @@
-export const MyTrainingPlan = () => {
+import { CatalogItem } from "./CatalogItem/CatalogItem";
+
+export const UsersTrainingCatalog = ({trainingPlans}) => {
+
+    console.log("Component My Training Plan: " +  trainingPlans);
+
     return (
         //TODO: Make may training plan with todos or combine it with mySchedules
         //TODO: Make Edit and delete to user data, todos .... make it to all
@@ -9,18 +14,19 @@ export const MyTrainingPlan = () => {
         //TODO: Make if user type in the browser ../myTrainingPlan, to go to the login if the user is not loged in
 
 
+        <section id="catalog-page">
 
-        <div>
-            <h1>My Training Plan</h1>
-            <h1>Dobriii</h1>
-            <h2>pl</h2>
+            <br></br>
+            <br></br>
+            <br></br>
 
-            <div>
-                <h3>day: Monday</h3>
-                <h4>Time: 11:30h</h4>
-                <h4>Муscel Group: Biceps</h4>
-            </div>
-            <button>Create Plan</button>
-        </div>
+            <h1>All Plans</h1>
+
+            {trainingPlans.length > 0
+                ? trainingPlans.map(plan => <CatalogItem key={plan._id} plan={plan} />)
+                : <h3 className="no-articles">No plans yet</h3>
+            }
+
+        </section>
     );
 };

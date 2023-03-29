@@ -21,7 +21,7 @@ export const Programs = () => {
                 <div className="row">
                     <div className="col-lg-6 offset-lg-3">
                         <div className={styles["section-heading"]}>
-                            <h2>Choose <em>Program</em></h2>
+                            <h2>Choose <em>Program or Course</em></h2>
                             <img src={waves} alt="waves" />
 
                             <p>Some Info about all our training programs</p>
