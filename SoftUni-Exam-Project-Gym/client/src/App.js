@@ -28,6 +28,7 @@ import { Logout } from './components/Logout';
 
 import { CreatePlan } from "./components/Plans/CreatePlan";
 import { EditPlan } from './components/Plans/EditPlan';
+import { PlanDetails } from './components/Plans/PlanDetails';
 
 function App() {
 
@@ -51,6 +52,20 @@ function App() {
                 setTrainingPlans(result);
             });
     }, []);
+
+    const addComment = (planId, comment) => {
+        setTrainingPlans(state => {
+            const game = state.find(x => x._id == planId);
+
+            const comments = game.comments || [];
+            comments.push(comment)
+
+            return [
+                ...state.filter(x => x._id !== planId),
+                { ...game, comments },
+            ];
+        });
+    };
 
     const addPlan = (planData) => {
         setTrainingPlans(state => [
@@ -102,9 +117,7 @@ function App() {
 
                     <Route path="/createPlan" element={<CreatePlan />} />
                     <Route path="/plans/:planId/edit" element={<EditPlan />} />
-
-
-
+                    <Route path="/plans/:planId/details" element={<PlanDetails plans={trainingPlans} addComment={addComment}/>} />
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/signUp" element={<SignUp />} />
