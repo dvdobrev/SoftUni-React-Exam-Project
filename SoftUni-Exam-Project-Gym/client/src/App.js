@@ -26,7 +26,8 @@ import { SignUp } from "./components/SignUp";
 import { Login } from "./components/Login";
 import { Logout } from './components/Logout';
 
-import { CreatePlan } from "./components/CreatePlan/CreatePlan";
+import { CreatePlan } from "./components/Plans/CreatePlan";
+import { EditPlan } from './components/Plans/EditPlan';
 
 function App() {
 
@@ -60,27 +61,12 @@ function App() {
 
     };
 
-    console.log(trainingPlans);
+    const editPlan = (planId, planData) => {
+        setTrainingPlans(state => state.map(plan => plan._id === planId ? planData : plan));
+    }
 
 
-    //TODO: remove the unnecessary code
     return (
-        // <div className="App">
-        //     <Header
-        //         navigationChangeHandler={navigationChangeHandler}
-        //     />
-        //     {/* <Preloader></Preloader> */}
-        //     <div>
-        //         {routes[page]}
-        //         <Footer />
-        //     </div>
-
-        //     {/* <MainBanner />
-        //     <CallToAction />
-        //     <Testimonials />
-        //     <ContakUsArea />
-        //     <Footer /> */}
-        // </div>
 
         <UserContext.Provider
             value={{
@@ -88,7 +74,8 @@ function App() {
                 loginHandler,
                 logoutHandler,
                 trainingPlans,
-                addPlan
+                addPlan,
+                editPlan,
             }}
         >
 
@@ -112,7 +99,10 @@ function App() {
                     <Route path="/socialMedia" element={<SocialMedia />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />
+
                     <Route path="/createPlan" element={<CreatePlan />} />
+                    <Route path="/plans/:planId/edit" element={<EditPlan />} />
+
 
 
 
