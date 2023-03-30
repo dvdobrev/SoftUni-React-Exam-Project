@@ -19,7 +19,7 @@ export const CatalogItem = ({ plan }) => {
                 <h4>{plan.muscleGroup}</h4>
             </div>
 
-            <Link to={`/catalog/${plan._id}`} className="details-button">
+            <Link to={`/plans/${plan._id}/details`} className="details-button">
                 Details
             </Link>
 
