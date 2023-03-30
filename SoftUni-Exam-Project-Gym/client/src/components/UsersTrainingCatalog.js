@@ -1,8 +1,6 @@
 import { CatalogItem } from "./CatalogItem/CatalogItem";
-
-export const UsersTrainingCatalog = ({trainingPlans}) => {
-
-    console.log("Component My Training Plan: " +  trainingPlans);
+import catalogItemCSS from '../imported-elements/css/catalogItem.module.css'
+export const UsersTrainingCatalog = ({ trainingPlans }) => {
 
     return (
         //TODO: Make may training plan with todos or combine it with mySchedules
@@ -22,11 +20,13 @@ export const UsersTrainingCatalog = ({trainingPlans}) => {
 
             <h1>All Plans</h1>
 
-            {trainingPlans.length > 0
-                ? trainingPlans.map(plan => <CatalogItem key={plan._id} plan={plan} />)
-                : <h3 className="no-articles">No plans yet</h3>
-            }
+            <div className={catalogItemCSS["card-container"]}>
+                {trainingPlans.length > 0
+                    ? trainingPlans.map(plan => <CatalogItem key={plan._id} plan={plan} />)
+                    : <h3 className="no-articles">No plans yet</h3>
+                }
 
+            </div>
         </section>
     );
 };
