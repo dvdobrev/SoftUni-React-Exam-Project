@@ -1,4 +1,6 @@
-import catalogItemCSS from '../../imported-elements/css/catalogItem.module.css'
+import catalogItemCSS from '../../imported-elements/css/catalogItem.module.css';
+import { Link } from 'react-router-dom';
+
 
 export const CatalogItem = ({ plan }) => {
     return (
@@ -17,10 +19,13 @@ export const CatalogItem = ({ plan }) => {
                 <h4>{plan.muscleGroup}</h4>
             </div>
 
-            <div class="buttons">
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
-            </div>
+            <Link to={`/catalog/${plan._id}`} className="details-button">
+                Details
+            </Link>
+
+            <Link to={`/plans/${plan._id}/edit`} className="details-button">
+                Edit
+            </Link>
         </div>
     );
 };
