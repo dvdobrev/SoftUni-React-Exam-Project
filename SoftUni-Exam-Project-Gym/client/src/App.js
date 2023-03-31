@@ -16,7 +16,7 @@ import { Classes } from "./components/Classes";
 import { Schedules } from "./components/Schedules";
 import { Programs } from "./components/Programs";
 import { MySchedules } from './components/MySchedules';
-import { UsersTrainingCatalog } from './components/UsersTrainingCatalog';
+import { PlansCatalog } from './components/PlansCatalog';
 import { SocialMedia } from './components/SocialMedia';
 import { PageNotFound } from './components/PageNotFound';
 import { Test } from './components/Test';
@@ -72,7 +72,7 @@ function App() {
             ...state,
             planData,
         ]);
-        navigate('/usersTrainingCatalog');
+        navigate('/plansCatalog');
 
     };
 
@@ -110,7 +110,7 @@ function App() {
                     <Route path="/schedules" element={<Schedules />} />
                     <Route path="/contact" element={<ContakUsArea />} />
                     <Route path="/mySchedules" element={<MySchedules />} />
-                    <Route path="/usersTrainingCatalog" element={<UsersTrainingCatalog trainingPlans={trainingPlans} />} />
+                    <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
                     <Route path="/socialMedia" element={<SocialMedia />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />

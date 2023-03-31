@@ -48,7 +48,7 @@ export const Header = ({ navigationChangeHandler }) => {
                                 <li><NavLink className={headerCSS["scroll-to-section"]} to="/programs">Programs/Courses</NavLink></li>
                                 <li><NavLink className={headerCSS["scroll-to-section"]} to="/classes">Classes</NavLink></li>
                                 {/* <li><NavLink className={headerCSS["scroll-to-section"]} to="schedules">Schedules</NavLink></li> */}
-                                <li> <NavLink className={headerCSS["main-button"]} to="/usersTrainingCatalog">Your Training Plans</NavLink></li>
+                                <li> <NavLink className={headerCSS["main-button"]} to="/plansCatalog">Your Training Plans</NavLink></li>
                                 
                                 {userData.email && 
                                     <li> <NavLink className={headerCSS["main-button"]} to="/createPlan">Creat Plan</NavLink></li>
