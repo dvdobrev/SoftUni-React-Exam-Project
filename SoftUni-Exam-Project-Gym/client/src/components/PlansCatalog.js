@@ -3,7 +3,7 @@ import catalogItemCSS from '../imported-elements/css/catalogItem.module.css'
 export const PlansCatalog = ({ trainingPlans }) => {
 
     return (
-        //TODO: Make may training plan with todos or combine it with mySchedules
+        //TODO: Make my training plan with todos or combine it with mySchedules
         //TODO: Make Edit and delete to user data, todos .... make it to all
         //TODO: Make logic the customer to send Email in Contak form, and get automaticly confirm that his email came.
         //TODO: Make Page with patern trainings element, for example for leg, arms...

@@ -21,20 +21,4 @@ export const Logout = () => {
     });
 
     return null;
-
-    //TODO: Edit this page
-    // return (
-
-
-    //     <div>
-    //         <br></br>
-    //         <br></br>
-
-    //         <br></br>
-
-    //         <br></br>
-
-    //         <h1> Logout Page</h1>
-    //     </div>
-    // );
 };

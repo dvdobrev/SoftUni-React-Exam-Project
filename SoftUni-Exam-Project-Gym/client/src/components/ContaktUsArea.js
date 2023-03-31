@@ -4,8 +4,6 @@ import contactCSS from "../imported-elements/css/global-stayles.module.css";
 
 export const ContakUsArea = () => {
     return (
-      //TODO: Make the same class as by login, to get the picture
-      //TODO: Correct the footer in another color
     <section className ={styles["section"]} id={styles["contact-us"]}>
         <div className ={styles["container-fluid"]}>
             <div className ="row">

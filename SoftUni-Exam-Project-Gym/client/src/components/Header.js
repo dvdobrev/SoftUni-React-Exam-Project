@@ -29,6 +29,8 @@ export const Header = ({ navigationChangeHandler }) => {
     //TODO: Remove the unnecessary code
     //TODO: Set the css (color, padiing...) of the Welcom span
     //TODO: Make the schedules page if you got time
+    //TODO: Make the same class as by login, to get the picture
+
 
     return (
 
@@ -45,7 +47,9 @@ export const Header = ({ navigationChangeHandler }) => {
                                 {userData.email && <span id={headerCSS["welcomeSpan"]} >Hello {userData.email}</span>}
 
                                 <li><NavLink className={headerCSS["scroll-to-section"]} to="/">Home</NavLink></li>
-                                <li><NavLink className={headerCSS["scroll-to-section"]} to="/programs">Programs/Courses</NavLink></li>
+                                {/* <li><NavLink className={headerCSS["scroll-to-section"]} to="/programs">Programs/Courses</NavLink></li> */}
+                                
+                                <li><NavLink className={headerCSS["scroll-to-section"]} to="/trainers">Trainers</NavLink></li>
                                 <li><NavLink className={headerCSS["scroll-to-section"]} to="/classes">Classes</NavLink></li>
                                 {/* <li><NavLink className={headerCSS["scroll-to-section"]} to="schedules">Schedules</NavLink></li> */}
                                 <li> <NavLink className={headerCSS["main-button"]} to="/plansCatalog">Your Training Plans</NavLink></li>

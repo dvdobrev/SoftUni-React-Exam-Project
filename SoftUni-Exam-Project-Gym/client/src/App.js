@@ -10,14 +10,13 @@ import {useLocalStorage} from './hooks/useLocalStorage';
 import { Header } from './components/Header';
 import { MainBanner } from './components/MainBanner';
 import { CallToAction } from './components/CallToAction';
-import { Testimonials } from './components/TestImonials';
+import { Trainers } from './components/Trainers';
 import { ContakUsArea } from './components/ContaktUsArea';
 import { Classes } from "./components/Classes";
 import { Schedules } from "./components/Schedules";
 import { Programs } from "./components/Programs";
 import { MySchedules } from './components/MySchedules';
 import { PlansCatalog } from './components/PlansCatalog';
-import { SocialMedia } from './components/SocialMedia';
 import { PageNotFound } from './components/PageNotFound';
 import { Test } from './components/Test';
 import { Footer } from './components/Footer';
@@ -101,17 +100,16 @@ function App() {
                         <main>
                             <MainBanner />
                             <CallToAction />
-                            <Testimonials />
                         </main>}
                     />
 
+                    <Route path="/trainers" element={<Trainers />} />
                     <Route path="/programs" element={<Programs />} />
                     <Route path="/classes" element={<Classes />} />
                     <Route path="/schedules" element={<Schedules />} />
                     <Route path="/contact" element={<ContakUsArea />} />
                     <Route path="/mySchedules" element={<MySchedules />} />
                     <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
-                    <Route path="/socialMedia" element={<SocialMedia />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />
 
