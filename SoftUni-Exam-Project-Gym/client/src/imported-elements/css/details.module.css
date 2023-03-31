@@ -1,0 +1,89 @@
+.plan-details-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.plan-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plan-details-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.plan-details-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.plan-details-info span {
+    font-weight: bold;
+}
+
+.plan-details-comments {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.plan-details-comments h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.plan-details-comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-details-comment {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.plan-details-comment p {
+    margin: 0;
+}
+
+.no-comment {
+    font-style: italic;
+    color: #999;
+}
+
+.plan-details-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.plan-details-edit-button,
+.plan-details-delete-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.plan-details-edit-button:hover,
+.plan-details-delete-button:hover {
+    background-color: #0069d9;
+}
