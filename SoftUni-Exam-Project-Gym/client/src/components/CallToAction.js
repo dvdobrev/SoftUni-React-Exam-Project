@@ -20,7 +20,7 @@ export const CallToAction = () => {
                             <div className={styles["main-button"]}>
                                 {/* <div className ={styles["main-button scroll-to-section"]}> */}
                                 {/* --------------------change this one too---------------- */}
-                                <NavLink className={styles["main-button"]} to="/signUp">Become a member</NavLink>
+                                <NavLink className={styles["main-button"]} to="/resgister">Become a member</NavLink>
                             </div>
                         </div>
                     </div>

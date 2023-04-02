@@ -11,7 +11,7 @@ import loginRegisterCSS from "../imported-elements/css/loginRegisterCSS.module.c
 
 export const Login = () => {
 
-    const { loginHandler } = useContext(UserContext);
+    const { userDataHandler } = useContext(UserContext);
     const navigate = useNavigate();
 
     const onSubmit = (e) => {
@@ -25,7 +25,7 @@ export const Login = () => {
 
         userServices.login(email, password)
             .then(data => {
-                loginHandler(data);
+                userDataHandler(data);
                 navigate('/');
             })
             .catch(() => {
@@ -37,7 +37,7 @@ export const Login = () => {
     };
 
     return (
-        <div className={loginRegisterCSS["signUpContainer"]}>
+        <div className={loginRegisterCSS["registerContainer"]}>
             <h1>Login </h1>
 
             <form onSubmit={onSubmit}>

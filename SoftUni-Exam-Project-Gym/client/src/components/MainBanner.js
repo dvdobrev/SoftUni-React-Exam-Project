@@ -19,7 +19,7 @@ export const MainBanner = () => {
                     <h6>work harder, get stronger</h6>
                     <h2>easy with our <em>gym</em></h2>
                     <div className={`${styles["main-button"]} ${styles["scroll-to-section"]}`}>
-                        <NavLink className={styles["main-button"]} to="/signUp">Become a member</NavLink>
+                        <NavLink className={styles["main-button"]} to="/register">Become a member</NavLink>
                     </div>
                 </div>
             </div>
