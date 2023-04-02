@@ -1,8 +1,7 @@
 import catalogItemCSS from '../../imported-elements/css/catalogItem.module.css';
 import { Link } from 'react-router-dom';
-
-
 export const CatalogItem = ({ plan }) => {
+
     return (
         <div className={catalogItemCSS["card"]}>
             <h3>{plan.day}</h3>
@@ -23,9 +22,6 @@ export const CatalogItem = ({ plan }) => {
                 Details
             </Link>
 
-            <Link to={`/plans/${plan._id}/edit`} className="details-button">
-                Edit
-            </Link>
         </div>
     );
 };
