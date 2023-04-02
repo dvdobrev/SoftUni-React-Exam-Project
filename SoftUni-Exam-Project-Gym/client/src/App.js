@@ -14,20 +14,23 @@ import { Trainers } from './components/Trainers';
 import { ContakUsArea } from './components/ContaktUsArea';
 import { Classes } from "./components/Classes";
 import { Schedules } from "./components/Schedules";
-import { Programs } from "./components/Programs";
+// import { Programs } from "./components/Programs";
 import { MySchedules } from './components/MySchedules';
 import { PlansCatalog } from './components/PlansCatalog';
 import { PageNotFound } from './components/PageNotFound';
 import { Test } from './components/Test';
-import { Footer } from './components/Footer';
+import { Profil } from './components/Profil';
 
-import { SignUp } from "./components/SignUp";
+import { Register } from "./components/Register";
 import { Login } from "./components/Login";
 import { Logout } from './components/Logout';
 
 import { CreatePlan } from "./components/Plans/CreatePlan";
 import { EditPlan } from './components/Plans/EditPlan';
 import { PlanDetails } from './components/Plans/PlanDetails';
+
+import { Footer } from './components/Footer';
+
 
 function App() {
 
@@ -37,7 +40,7 @@ function App() {
     const navigate = useNavigate();
 
 
-    const loginHandler = (userData) => {
+    const userDataHandler = (userData) => {
         setUserData(userData);
     };
 
@@ -85,7 +88,7 @@ function App() {
         <UserContext.Provider
             value={{
                 userData,
-                loginHandler,
+                userDataHandler: userDataHandler,
                 logoutHandler,
                 trainingPlans,
                 addPlan,
@@ -104,7 +107,7 @@ function App() {
                     />
 
                     <Route path="/trainers" element={<Trainers />} />
-                    <Route path="/programs" element={<Programs />} />
+                    {/* <Route path="/programs" element={<Programs />} /> */}
                     <Route path="/classes" element={<Classes />} />
                     <Route path="/schedules" element={<Schedules />} />
                     <Route path="/contact" element={<ContakUsArea />} />
@@ -112,13 +115,15 @@ function App() {
                     <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />
+                    <Route path="/profil" element={<Profil userData={userData}/>} />
+
 
                     <Route path="/createPlan" element={<CreatePlan />} />
                     <Route path="/plans/:planId/edit" element={<EditPlan />} />
                     <Route path="/plans/:planId/details" element={<PlanDetails plans={trainingPlans} addComment={addComment}/>} />
 
                     <Route path="/login" element={<Login />} />
-                    <Route path="/signUp" element={<SignUp />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="/logout" element={<Logout />} />
 
                     {/* <Route path="/pricing/*" element={<Pricing />} />
