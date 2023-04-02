@@ -9,6 +9,7 @@ import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 
 
 export const EditPlan = () => {
+
     const [currentPlan, setCurrentPlan] = useState({});
     const { editPlan } = useContext(UserContext);
     const { planId } = useParams();
@@ -29,7 +30,7 @@ export const EditPlan = () => {
         planServices.edit(planId, planData)
             .then(result => {
                 editPlan(planId, result);
-                navigate(`/usersTrainingCatalog`)
+                navigate(`/plansCatalog`)
             });
     };
 
