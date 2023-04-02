@@ -20,7 +20,6 @@ import { login } from "../services/userServices";
 export const Classes = () => {
 
     const { userData } = useContext(UserContext);
-    console.log(userData.emaill);
 
     const [activeTab, setActiveTab] = useState('tabs-1'); // set the initial active tab to the first tab
 
