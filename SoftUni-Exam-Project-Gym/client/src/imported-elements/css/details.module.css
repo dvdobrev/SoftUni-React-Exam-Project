@@ -87,3 +87,39 @@
 .plan-details-delete-button:hover {
     background-color: #0069d9;
 }
+
+/* ------------confirm Message CSS---------------- */
+
+.confirm-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    background-color: #d28888;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 9999;
+}
+
+.confirm-message h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.confirm-message button {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.confirm-message button:hover {
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+}
