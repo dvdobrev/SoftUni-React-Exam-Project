@@ -1,5 +1,7 @@
 import { CatalogItem } from "./CatalogItem/CatalogItem";
 import catalogItemCSS from '../imported-elements/css/catalogItem.module.css'
+
+
 export const PlansCatalog = ({ trainingPlans }) => {
 
     return (
