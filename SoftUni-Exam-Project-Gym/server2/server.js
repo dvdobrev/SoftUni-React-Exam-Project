@@ -1365,17 +1365,13 @@
             }
         },
         comments: {
-        
+
         },
 
-        programs: {
-            "user1": {
-                "mondey": "10:45h"
-            },
-            "user2": {
-                "mitwoch": "12:00h"
-            },
-        }
+        userData: {
+
+        },
+
     };
     var rules$1 = {
         users: {
