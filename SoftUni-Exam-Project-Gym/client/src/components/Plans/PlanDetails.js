@@ -8,11 +8,10 @@ import detailsCSS from '../../imported-elements/css/details.module.css';
 
 export const PlanDetails = ({
     addComment,
+    fetchTrainingPlans,
 }) => {
 
     const [showConfirm, setShowConfirm] = useState(false);
-
-
     const { planId } = useParams();
     const [currentPlan, setCurrentPlan] = useState({});
     const navigate = useNavigate();
@@ -69,36 +68,22 @@ export const PlanDetails = ({
         }));
     }
 
-    // const deletePlanHandler = () => {
-
-    //     setShowConfirm(true);
-
-    //     const confirmed = window.confirm('Are you sure you want to delete this plan?');
-
-    //     if (confirmed) {
-    //         planServices.deleteOne(planId)
-    //             .then(() => {
-    //                 navigate(`/plansCatalog`);
-    //             });
-    //     }
-    // };
-
-    const deletePlanHandler = () => {
-        setShowConfirm(true); // Set showConfirm to true
-    };
-
     const confirmDeleteHandler = () => {
-        planServices.deleteOne(planId)
-            .then(() => {
-                navigate(`/plansCatalog`);
-            });
+        setShowConfirm(true);
     };
 
     const cancelDeleteHandler = () => {
-        setShowConfirm(false); // Set showConfirm to false
+        setShowConfirm(false);
     };
 
-
+    const deletePlanHandler = () => {
+        planServices.deleteOne(planId)
+            .then(() => {
+                fetchTrainingPlans();
+                setShowConfirm(false);
+                navigate(`/plansCatalog`);
+            });
+    };
 
     return (
         <section>
@@ -134,7 +119,7 @@ export const PlanDetails = ({
                         <Link to={`/plans/${planId}/edit`} className={detailsCSS["plan-details-edit-button"]}>
                             Edit
                         </Link>
-                        <button onClick={deletePlanHandler} className={detailsCSS["plan-details-delete-button"]}>
+                        <button onClick={confirmDeleteHandler} className={detailsCSS["plan-details-delete-button"]}>
                             Delete
                         </button>
                     </div>}
@@ -173,10 +158,10 @@ export const PlanDetails = ({
 
 
                 {showConfirm && (
-                    <div className={detailsCSS["confirm-message"]}>
-                        <h2 className={`${detailsCSS["h2"]}`}>Are you sure you want to delete this plan?</h2>
-                        <button className={`${detailsCSS["button"]}`} onClick={cancelDeleteHandler}>Cancel</button>
-                        <button className={`${detailsCSS["button"]}`} onClick={confirmDeleteHandler}>Delete</button>
+                    <div className={`${detailsCSS["confirm-message"]} ${detailsCSS["h2"]}`}>
+                        <h2 className={detailsCSS["h2"]}>Are you sure you want to delete this plan?</h2>
+                        <button onClick={cancelDeleteHandler}>Cancel</button>
+                        <button onClick={deletePlanHandler}>Delete</button>
                     </div>
                 )}
             </article>

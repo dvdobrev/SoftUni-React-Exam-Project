@@ -5,7 +5,7 @@ import { UserContext } from './contexts/UserContext';
 
 import * as traingPlanService from './services/trainingPlanService';
 
-import {useLocalStorage} from './hooks/useLocalStorage';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 import { Header } from './components/Header';
 import { MainBanner } from './components/MainBanner';
@@ -55,6 +55,13 @@ function App() {
             });
     }, []);
 
+    const fetchTrainingPlans = () => {
+        traingPlanService.getAll()
+            .then(result => {
+                setTrainingPlans(result);
+            });
+    }
+
     const addComment = (planId, comment) => {
         setTrainingPlans(state => {
             const game = state.find(x => x._id == planId);
@@ -91,6 +98,7 @@ function App() {
                 userDataHandler: userDataHandler,
                 logoutHandler,
                 trainingPlans,
+                fetchTrainingPlans,
                 addPlan,
                 editPlan,
             }}
@@ -115,12 +123,18 @@ function App() {
                     <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />
-                    <Route path="/profil" element={<Profil userData={userData}/>} />
+                    <Route path="/profil" element={<Profil userData={userData} />} />
 
 
                     <Route path="/createPlan" element={<CreatePlan />} />
                     <Route path="/plans/:planId/edit" element={<EditPlan />} />
-                    <Route path="/plans/:planId/details" element={<PlanDetails plans={trainingPlans} addComment={addComment}/>} />
+                    <Route path="/plans/:planId/details"
+                        element={<PlanDetails
+                            plans={trainingPlans}
+                            addComment={addComment}
+                            fetchTrainingPlans={fetchTrainingPlans}
+                        />}
+                    />
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
