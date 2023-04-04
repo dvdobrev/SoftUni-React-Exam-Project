@@ -128,9 +128,11 @@ export const PlanDetails = ({
                                 <p>{comment.username}: {comment.comment}</p>
                             </li>
                         ))}
-                        {!allComments && (
-                            <p className={detailsCSS["no-comment"]}>No comments.</p>
-                        )}
+
+                        {allComments.length === 0
+                            ? <p className={detailsCSS["no-comment"]}>No comments yet.</p>
+                            : ""
+                        }
                     </ul>
 
                 </div>
@@ -143,37 +145,6 @@ export const PlanDetails = ({
                             Delete
                         </button>
                     </div>}
-            </div>
-
-
-            <article className={commentsCSS["create-comment"]}>
-                <label>Add new comment:</label>
-                <form className={commentsCSS["form"]} onSubmit={addCommentHandler}>
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Enter your username"
-                        onChange={onChangeUsername}
-                    // value={comment.username}
-                    />
-
-                    {error.username &&
-                        <div style={{ color: 'red' }}>{error.username}</div>
-                    }
-
-                    <textarea
-                        name="comment"
-                        placeholder="Comment......"
-                        onChange={onChangeComment}
-                    // value={comment.comment}
-                    />
-
-                    <input
-                        className={commentsCSS["btn submit"]}
-                        type="submit"
-                        value="Add Comment"
-                    />
-                </form>
 
 
                 {showConfirm && (
@@ -183,7 +154,40 @@ export const PlanDetails = ({
                         <button onClick={deletePlanHandler}>Delete</button>
                     </div>
                 )}
-            </article>
+            </div>
+
+
+            {userData.email &&
+                <article className={commentsCSS["create-comment"]}>
+                    <label>Add new comment:</label>
+                    <form className={commentsCSS["form"]} onSubmit={addCommentHandler}>
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Enter your username"
+                            onChange={onChangeUsername}
+                        // value={comment.username}
+                        />
+
+                        {error.username &&
+                            <div style={{ color: 'red' }}>{error.username}</div>
+                        }
+
+                        <textarea
+                            name="comment"
+                            placeholder="Comment......"
+                            onChange={onChangeComment}
+                        // value={comment.comment}
+                        />
+
+                        <input
+                            className={commentsCSS["btn submit"]}
+                            type="submit"
+                            value="Add Comment"
+                        />
+                    </form>
+                </article>
+            }
         </section>
     );
 };
