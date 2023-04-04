@@ -20,15 +20,28 @@ export const PlanDetails = ({
     const ownerId = userData._id;
     const planOwnerId = currentPlan._ownerId;
 
-    const [comment, setComment] = useState({
-        username: '',
-        comment: '',
-    });
+    const [username, setUsername] = useState('');
+    const [comment, setComment] = useState('');
+    const [allComments, setAllComments] = useState([]);
+
+
 
     const [error, setError] = useState({
         username: '',
         comment: '',
     });
+
+    useEffect(() => {
+        planServices.getAllComments()
+            .then(plans => plans.filter(plan => plan.planId === planId))
+            .then(filteredComments => {
+                setAllComments(filteredComments);
+            })
+            .catch(error => {
+                // Handle any errors that occurred while fetching or filtering comments
+            });
+    }, [planId]);
+
 
     useEffect(() => {
         planServices.getOne(planId)
@@ -40,23 +53,29 @@ export const PlanDetails = ({
     const addCommentHandler = (e) => {
         e.preventDefault();
 
-        const result = `${comment.username}: ${comment.comment}`;
-
-        addComment(planId, result);
-    }
-
-    const onChange = (e) => {
-        setComment(state => ({
-            ...state,
-            [e.target.name]: e.target.value
-        }));
+        planServices
+            .createComment({ planId, username, comment })
+            .then((newComment) => {
+                setAllComments((prevComments) => [...prevComments, newComment]);
+                setUsername('');
+                setComment('');
+            })
+            .catch((error) => console.error(error));
     };
 
-    const validateUsername = (e) => {
-        const username = e.target.value;
+    const onChangeUsername = (e) => {
+        setUsername(e.target.value);
+        validateUsername(e.target.value);
+    };
+
+    const onChangeComment = (e) => {
+        setComment(e.target.value);
+    };
+
+    const validateUsername = (username) => {
         let errorMessage = '';
 
-        if (username.length < 4) {
+        if (username.length < 2) {
             errorMessage = 'Username must be longer than 4 characters';
         } else if (username.length > 10) {
             errorMessage = 'Username must be shorter than 10 characters';
@@ -104,15 +123,16 @@ export const PlanDetails = ({
                 <div className={detailsCSS["plan-details-comments"]}>
                     <h2>Comments:</h2>
                     <ul className={detailsCSS["plan-details-comments-list"]}>
-                        {/* {game.comments?.map(x => 
-                            <li className={detailsCSS["plan-details-comment"]}>
-                                <p>{x}</p>
+                        {allComments?.map(comment => (
+                            <li key={comment._id} className={detailsCSS["plan-details-comment"]}>
+                                <p>{comment.username}: {comment.comment}</p>
                             </li>
-                        )} */}
-                        {/* {!game.comments &&
-                                <p className={detailsCSS["no-comment"]}>No comments.</p>
-                        } */}
+                        ))}
+                        {!allComments && (
+                            <p className={detailsCSS["no-comment"]}>No comments.</p>
+                        )}
                     </ul>
+
                 </div>
                 {ownerId === planOwnerId &&
                     <div className={detailsCSS["plan-details-buttons"]}>
@@ -132,10 +152,9 @@ export const PlanDetails = ({
                     <input
                         type="text"
                         name="username"
-                        placeholder="John Doe"
-                        onChange={onChange}
-                        onBlur={validateUsername}
-                        value={comment.username}
+                        placeholder="Enter your username"
+                        onChange={onChangeUsername}
+                    // value={comment.username}
                     />
 
                     {error.username &&
@@ -145,8 +164,8 @@ export const PlanDetails = ({
                     <textarea
                         name="comment"
                         placeholder="Comment......"
-                        onChange={onChange}
-                        value={comment.comment}
+                        onChange={onChangeComment}
+                    // value={comment.comment}
                     />
 
                     <input
