@@ -12,8 +12,6 @@ export const CreatePlan = () => {
 
         const planData = Object.fromEntries(new FormData(e.target));
 
-        console.log(planData);
-
         planServices.create(planData)
             .then(result => {
                 addPlan(result)
