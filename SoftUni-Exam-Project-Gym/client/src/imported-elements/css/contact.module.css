@@ -76,3 +76,25 @@
 .contact-form button:hover {
     background-color: #f9735b;
 }
+
+.success {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    animation: slide 3s forwards;
+    z-index: 9999;
+    /* Make sure the message is on top of other elements */
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
