@@ -44,27 +44,28 @@ export const EditPlan = () => {
             <form id="edit" onSubmit={onSubmit}>
                 <div className={createPlanCSS["createPlan"]}>
                     <h1>Edit Plan</h1>
-                    <label htmlFor="day">Day:
+
+                    <label htmlFor="level">
+                        Level:
+                        <select name="level">
+                            <option value="beginner">beginner</option>
+                            <option value="advanced">advanced</option>
+                            <option value="profi">profi</option>
+                        </select>
+                    </label>
+
+                    <label htmlFor="days">Days:
                         <input
                             type="text"
-                            name="day"
-                            defaultValue={currentPlan.day}
+                            name="days"
+                            defaultValue={currentPlan.days} />
+                    </label>
+
+                    <label htmlFor="description">Description:
+                        <textarea
+                            name="description"
+                            defaultValue={currentPlan.description}
                         />
-                    </label>
-
-                    <label htmlFor="time">Time:
-                        <input
-                            type="text"
-                            name="time"
-                            defaultValue={currentPlan.time} />
-                    </label>
-
-
-                    <label htmlFor="muscleGroup">Muscle Group:
-                        <input
-                            type="text"
-                            name="muscleGroup"
-                            defaultValue={currentPlan.muscleGroup} />
                     </label>
 
                     <input
