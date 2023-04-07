@@ -100,6 +100,7 @@ export const PlanDetails = ({
             .then(() => {
                 fetchTrainingPlans();
                 setShowConfirm(false);
+                planServices.deleteAllComments(planId);
                 navigate(`/plansCatalog`);
             });
     };
@@ -116,9 +117,20 @@ export const PlanDetails = ({
             <h1 className={detailsCSS["plan-details-title"]}>Plan Details</h1>
             <div className={detailsCSS["plan-details-container"]}>
                 <div className={detailsCSS["plan-details-info"]}>
-                    <h1>Day: <span className={detailsCSS["plan-details-day"]}>{currentPlan.day}</span></h1>
-                    <h1>Time: <span className={detailsCSS["plan-details-time"]}>{currentPlan.time}</span></h1>
-                    <h1>Muscle: <span className={detailsCSS["plan-details-muscle"]}>{currentPlan.muscleGroup}</span></h1>
+                    <h1>Level:
+                        <span className={detailsCSS["plan-details-day"]}>{currentPlan.level}</span>
+                    </h1>
+                    <h1>Days per week:
+                        <span className={detailsCSS["plan-details-time"]}>{currentPlan.days}
+                        </span>
+                    </h1>
+
+                    <div>
+                        <h1>Description: </h1>
+                        <span className={detailsCSS["plan-details-muscle"]}>{currentPlan.description}
+                        </span>
+
+                    </div>
                 </div>
                 <div className={detailsCSS["plan-details-comments"]}>
                     <h2>Comments:</h2>
@@ -165,19 +177,15 @@ export const PlanDetails = ({
                             type="text"
                             name="username"
                             placeholder="Enter your username"
+                            value={username}
                             onChange={onChangeUsername}
-                        // value={comment.username}
                         />
-
-                        {error.username &&
-                            <div style={{ color: 'red' }}>{error.username}</div>
-                        }
 
                         <textarea
                             name="comment"
                             placeholder="Comment......"
+                            value={comment}
                             onChange={onChangeComment}
-                        // value={comment.comment}
                         />
 
                         <input
