@@ -1336,33 +1336,26 @@
         plans: {
             "ff436770-76c5-40e2-b231-77409eda7a61": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "day": "Sunday",
-                "time": "20h",
-                "muscleGroup": "Legs",
+                "level": "beginner",
+                "days": "3",
+                "description": "For begginers",
                 "_createdOn": 1617194128618,
             },
             "1840a313-225c-416a-817a-9954d4609f7c": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "day": "Monday",
-                "time": "10h",
-                "muscleGroup": "Chest",
+                "level": "Advanced",
+                "days": "5",
+                "description": "For advanced people",
                 "_createdOn": 1617194210928,
             },
             "126777f5-3277-42ad-b874-76d043b069cb": {
                 "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-                "day": "Donerstag",
-                "time": "22h",
-                "muscleGroup": "Arms",
+                "level": "Profi",
+                "days": "7",
+                "description": "For Profi Players",
                 "_createdOn": 1617194295474,
             },
 
-            "126777f5-3277-42ad-b874-76d043b069ck": {
-                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-                "day": "Fritag",
-                "time": "08h",
-                "muscleGroup": "Bauch",
-                "_createdOn": 1617194295474,
-            }
         },
         comments: {
             // "8f226555-f969-4cca-b110-b421cbe531cf": [{"dobrin": "Good Plan"}, {"pesho": "Not good"}],
