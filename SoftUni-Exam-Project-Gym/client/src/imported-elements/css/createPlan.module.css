@@ -1,13 +1,81 @@
-.createPlan {
-    background-color: brown;    
+.createPlaneSection {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-image: url(../images/createPlan.jpg);
+}
+
+.createPlaneSection h1 {
+    color: white;
+}
+
+.createPlan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+
+.createPlan label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: white;
+    width: -webkit-fill-available;
 
 }
 
-.submitBtn {
-    background-color: aquamarine;
+.createPlan label select,
+.createPlan label input[type='text'],
+.createPlan label textarea {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
 
+.createPlan label select:focus,
+.createPlan label input[type='text']:focus,
+.createPlan label textarea:focus {
+    outline: none;
+    border-color: #4285f4;
+}
+
+.createPlan label select {
+    height: 40px;
+}
+
+.createPlan label textarea {
+    min-height: 100px;
+}
+
+.submitBtn {
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.submitBtn:hover {
+    background-color: #ed563b;
+}
+
+.submit-container {
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+}
+
+#create-plan-form {
+    width: 26%;
+    min-height: 70%;
 }

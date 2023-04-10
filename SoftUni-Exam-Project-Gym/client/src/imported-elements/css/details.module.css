@@ -1,6 +1,18 @@
+.details-section {
+    background-image: url(../images/details2.jpg);
+    background-size: auto;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+
 .plan-details-title {
-    font-size: 32px;
+    font-size: 52px;
     margin-bottom: 20px;
+    color: white;
+    text-align: center;
+    /* padding-top: 106px; */
 }
 
 .plan-details-container {
@@ -14,27 +26,35 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: rgba(142, 244, 172, 0.8);
     border-radius: 10px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    width: 34%;
 }
 
-.plan-details-info h1 {
-    font-size: 24px;
+.plan-details-info h2 {
+    font-size: 28px;
     margin-bottom: 10px;
+    display: inline-block;
+    text-align: left;
+    margin: 0;
 }
 
 .plan-details-info span {
     font-weight: bold;
+    color: red;
+    margin-left: 20px;
 }
 
 .plan-details-comments {
     margin-bottom: 20px;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    width: 34%;
+    text-align: center;
+    background-color: #eaeaa3;
 }
 
 .plan-details-comments h2 {
@@ -53,10 +73,14 @@
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 10px;
+    background-color: #44d2ef;
+
 }
 
 .plan-details-comment p {
     margin: 0;
+    color: white;
+    font-size: 18px;
 }
 
 .no-comment {
@@ -70,25 +94,51 @@
     justify-content: center;
 }
 
-.plan-details-edit-button,
-.plan-details-delete-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+.submit-button {
+    margin-bottom: 14px;
+    margin-top: 8px;
+}
+
+/* ------------Comments CSS---------------- */
+
+.create-comment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.create-comment label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 26px;
+
+}
+
+.create-comment .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+}
+
+.create-comment input[type="text"],
+.create-comment textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.plan-details-edit-button:hover,
-.plan-details-delete-button:hover {
-    background-color: #0069d9;
+.addButton {
+    margin-bottom: 14px;
 }
 
-/* ------------confirm Message CSS---------------- */
+/* ------------Confirm Message CSS---------------- */
 
 .confirm-message {
     position: fixed;
@@ -99,7 +149,7 @@
     background-color: #d28888;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 9999;
 }
 

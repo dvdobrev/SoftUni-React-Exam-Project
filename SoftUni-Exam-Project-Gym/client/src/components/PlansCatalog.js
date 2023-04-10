@@ -1,5 +1,6 @@
 import { CatalogItem } from "./CatalogItem/CatalogItem";
-import catalogItemCSS from '../imported-elements/css/catalogItem.module.css'
+import catalogCSS from '../imported-elements/css/catalog.module.css';
+import headerCSS from '../imported-elements/css/header.module.css';
 
 
 export const PlansCatalog = ({ trainingPlans }) => {
@@ -13,8 +14,9 @@ export const PlansCatalog = ({ trainingPlans }) => {
         //TODO: Make a page where the user can posts their training programs
         //TODO: Make if user type in the browser ../myTrainingPlan, to go to the login if the user is not loged in
         //TODO: Make the css of the last to orders to be separated
+        //TODO: The second row the cards are not separated same
 
-        <section id="catalog-page">
+        <section id={`${catalogCSS["catalog-page"]}`}>
 
             <br></br>
             <br></br>
@@ -22,7 +24,7 @@ export const PlansCatalog = ({ trainingPlans }) => {
 
             <h1>All Plans</h1>
 
-            <div className={catalogItemCSS["card-container"]}>
+            <div className={catalogCSS["card-container"]}>
                 {trainingPlans.length > 0
                     ? trainingPlans.map(plan => <CatalogItem key={plan._id} plan={plan} />)
                     : <h3 className="no-articles">No plans yet</h3>

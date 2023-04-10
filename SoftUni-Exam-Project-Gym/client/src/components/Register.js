@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import * as userServices from "../services/userServices";
 
-import styles from "../imported-elements/css/global-stayles.module.css";
+import styles from '../imported-elements/css/global-stayles.module.css'
 import loginRegisterCSS from "../imported-elements/css/loginRegisterCSS.module.css";
 
 
@@ -38,8 +38,6 @@ export const Register = () => {
         const repeatPassword = formData.get('repeatPassword');
         const firstName = formData.get('firstName');
         const lastName = formData.get('lastName');
-        const city = formData.get('city');
-
 
         console.log(email);
         console.log(password);
@@ -51,10 +49,10 @@ export const Register = () => {
             return;
         }
 
-        userServices.register(email, password, firstName, lastName, city)
+        userServices.register(email, password, firstName, lastName)
         .then(userData => {
             userDataHandler(userData);
-            return userServices.saveUserData(firstName, lastName, city);
+            return userServices.saveUserData(firstName, lastName);
         })
         .then(() => {
             navigate('/');
@@ -107,7 +105,6 @@ export const Register = () => {
 
     // TODO: Check if there is possible to submit form with empty password,email ...
     //TODO: Search and delete the console.log in whole project -> crl + shft + H
-    //TODO: Change the city validator
 
     const passwordValidation = (e) => {
         const password = e.target.value;
@@ -159,9 +156,9 @@ export const Register = () => {
     return (
 
         <div className={loginRegisterCSS["registerContainer"]}>
-            <h1>Sign Up </h1>
+            <h1>Sign Up</h1>
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id={loginRegisterCSS["lr-form"]}>
 
                 {/* <label htmlFor="firstName">First name</label>
             <div className="input-wrapper">
@@ -202,25 +199,6 @@ export const Register = () => {
                             name="lastName"
                             size={30}
                             placeholder="Last Name"
-                            onBlur={lastnameValidation}
-                        />
-
-                        {error.lastnameErrorMessage &&
-                            <div style={{ color: 'white' }}>{error.lastnameErrorMessage}</div>
-                        }
-
-                        <br />
-                        <br />
-                    </div>
-                </div>
-                    
-                <div className="form-outline mb-0">
-                    <div className="form-outline">
-                        <input
-                            type="text"
-                            name="city"
-                            size={30}
-                            placeholder="City"
                             onBlur={lastnameValidation}
                         />
 
@@ -288,7 +266,7 @@ export const Register = () => {
                     </div>
                 </div>
 
-                <button type="text" name="firstName"> Sign up </button>
+                <button className={`${styles["buttons"]} ${loginRegisterCSS["button"]}`} type="text" name="firstName"> Sign up </button>
 
             </form>
         </div>

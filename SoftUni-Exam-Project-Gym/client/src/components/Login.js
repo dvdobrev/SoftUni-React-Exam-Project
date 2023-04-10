@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as userServices from "../services/userServices";
 
-
-import styles from "../imported-elements/css/global-stayles.module.css";
+import styles from '../imported-elements/css/global-stayles.module.css'
 import loginRegisterCSS from "../imported-elements/css/loginRegisterCSS.module.css"
 
 
@@ -40,7 +39,7 @@ export const Login = () => {
         <div className={loginRegisterCSS["registerContainer"]}>
             <h1>Login </h1>
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id={loginRegisterCSS["lr-form"]}>
 
                 <div className="form-outline mb-0">
                     <div className="form-outline">
@@ -58,8 +57,7 @@ export const Login = () => {
                     </div>
                 </div>
 
-                <button type="text">Log In </button>
-
+                <button className={styles["buttons"]} type="text">Log In </button>
             </form>
         </div>
     );

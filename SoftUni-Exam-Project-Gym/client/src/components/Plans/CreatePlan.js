@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
+import styles from '../../imported-elements/css/global-stayles.module.css'
 
 export const CreatePlan = () => {
 
@@ -16,14 +17,14 @@ export const CreatePlan = () => {
     };
 
     return (
-        <section>
+        <section className={`${createPlanCSS["createPlaneSection"]}`}>
             <br />
             <br />
             <br />
 
-            <form onSubmit={onSubmit}>
+            <h1>Create your own one month plan</h1>
+            <form onSubmit={onSubmit} id={createPlanCSS["create-plan-form"]}>
                 <div className={createPlanCSS['createPlan']}>
-                    <h1>Create your one month plan</h1>
                     <label htmlFor="level">
                         Level:
                         <select id="tag" name="level">
@@ -40,20 +41,20 @@ export const CreatePlan = () => {
                         <input type="text" name="days" placeholder="Days per week" />
                     </label>
 
-                    <label htmlFor="description">Description: 
+                    <label htmlFor="description">Description:
                         <textarea
                             name="description"
                             placeholder="Describe your plan"
                         />
                     </label>
+                </div>
 
-
+                <div className={createPlanCSS["submit-container"]}>
                     <input
-                        className={createPlanCSS["submitBtn"]}
+                        className={styles["buttons"]}
                         type="submit"
                         value="Create Plan"
                     />
-
                 </div>
             </form>
         </section>

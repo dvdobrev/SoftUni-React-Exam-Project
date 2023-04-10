@@ -1,6 +1,10 @@
+#contact {
+    width: 100%;
+}
+
 #contact-us {
-    margin-top: 140px;
-    height: 86vh;
+    margin-top: 98px;
+    height: 88vh;
 
 }
 
@@ -56,25 +60,6 @@
 
 .contact-form ::placeholder {
     color: #7a7a7a;
-}
-
-.contact-form button {
-    display: inline-block;
-    font-size: 13px;
-    padding: 11px 17px;
-    background-color: #ed563b;
-    color: #fff;
-    text-align: center;
-    font-weight: 400;
-    text-transform: uppercase;
-    transition: all .3s;
-    border: none;
-    outline: none;
-    margin-top: -8px;
-}
-
-.contact-form button:hover {
-    background-color: #f9735b;
 }
 
 .success {

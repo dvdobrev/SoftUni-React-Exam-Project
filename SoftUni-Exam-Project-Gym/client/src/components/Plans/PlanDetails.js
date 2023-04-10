@@ -3,8 +3,9 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
 import * as planServices from '../../services/trainingPlanService';
-import commentsCSS from '../../imported-elements/css/comments.module.css';
 import detailsCSS from '../../imported-elements/css/details.module.css';
+import styles from '../../imported-elements/css/global-stayles.module.css'
+
 
 export const PlanDetails = ({
     addComment,
@@ -106,27 +107,26 @@ export const PlanDetails = ({
     };
 
     return (
-        <section>
+        <section className={`${detailsCSS["details-section"]}`}>
             <br></br>
             <br></br>
-
             <br></br>
-
             <br></br>
 
             <h1 className={detailsCSS["plan-details-title"]}>Plan Details</h1>
-            <div className={detailsCSS["plan-details-container"]}>
+            <div className={`${detailsCSS["plan-details-container"]}`}>
                 <div className={detailsCSS["plan-details-info"]}>
-                    <h1>Level:
+                    <h2>Level:
                         <span className={detailsCSS["plan-details-day"]}>{currentPlan.level}</span>
-                    </h1>
-                    <h1>Days per week:
+                    </h2>
+                    <h2>Days per week:
                         <span className={detailsCSS["plan-details-time"]}>{currentPlan.days}
                         </span>
-                    </h1>
+                    </h2>
+
+                    <h2>Description: </h2>
 
                     <div>
-                        <h1>Description: </h1>
                         <span className={detailsCSS["plan-details-muscle"]}>{currentPlan.description}
                         </span>
 
@@ -150,10 +150,10 @@ export const PlanDetails = ({
                 </div>
                 {ownerId === planOwnerId &&
                     <div className={detailsCSS["plan-details-buttons"]}>
-                        <Link to={`/plans/${planId}/edit`} className={detailsCSS["plan-details-edit-button"]}>
+                        <Link to={`/plans/${planId}/edit`} className={styles["buttons"]}>
                             Edit
                         </Link>
-                        <button onClick={confirmDeleteHandler} className={detailsCSS["plan-details-delete-button"]}>
+                        <button onClick={confirmDeleteHandler} className={styles["buttons"]}>
                             Delete
                         </button>
                     </div>}
@@ -170,9 +170,9 @@ export const PlanDetails = ({
 
 
             {userData.email &&
-                <article className={commentsCSS["create-comment"]}>
+                <article className={detailsCSS["create-comment"]}>
                     <label>Add new comment:</label>
-                    <form className={commentsCSS["form"]} onSubmit={addCommentHandler}>
+                    <form className={detailsCSS["form"]} onSubmit={addCommentHandler}>
                         <input
                             type="text"
                             name="username"
@@ -189,7 +189,7 @@ export const PlanDetails = ({
                         />
 
                         <input
-                            className={commentsCSS["btn submit"]}
+                            className={`${styles["buttons"]} ${detailsCSS["addButton"]}`}
                             type="submit"
                             value="Add Comment"
                         />

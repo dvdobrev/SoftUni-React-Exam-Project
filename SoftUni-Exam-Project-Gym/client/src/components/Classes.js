@@ -1,11 +1,7 @@
 import { useState } from "react";
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
 
 import styles from "../imported-elements/css/global-stayles.module.css";
 import classesCSS from "../imported-elements/css/our-classes.module.css";
-
-
 
 import waves from "../imported-elements/images/line-dec.png";
 import tabsFirstIcon from "../imported-elements/images/tabs-first-icon.png";
@@ -13,13 +9,10 @@ import traning1 from "../imported-elements/images/training-image-01.jpg";
 import traning2 from "../imported-elements/images/training-image-02.jpg";
 import traning3 from "../imported-elements/images/training-image-03.jpg";
 import traning4 from "../imported-elements/images/training-image-04.jpg";
-import { login } from "../services/userServices";
 
 
 
 export const Classes = () => {
-
-    const { userData } = useContext(UserContext);
 
     const [activeTab, setActiveTab] = useState('tabs-1'); // set the initial active tab to the first tab
 
@@ -28,7 +21,7 @@ export const Classes = () => {
     }
 
     return (
-        <section className={`${styles["section"]}`} id="our-classes">
+        <section className={`${classesCSS["our-classes"]}`}>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6 offset-lg-3">
@@ -91,45 +84,27 @@ export const Classes = () => {
                                 <h4>First Training Class</h4>
                                 <h6>(Bret D. Bowers)</h6>
                                 <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. </p>
-                                <div className={styles["main-button"]}>
-                                    <a href="#">View Schedule
-                                    </a>
-                                    {userData.email && <button>Book Program</button>}
-                                </div>
-
                             </article>
+
                             <article id='tabs-2' style={{ display: activeTab === "tabs-2" ? "block" : "none" }}>
                                 <img src={traning2} alt="Second Training" />
                                 <h4>Second Training Class</h4>
                                 <h6>(Paul D. Newman)</h6>
                                 <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. </p>
-                                <div className={styles["main-button"]}>
-                                    <a href="#">View Schedule
-                                    </a>
-                                    {userData.email && <button>Book Program</button>}
-                                </div>
                             </article>
+
                             <article id='tabs-3' style={{ display: activeTab === "tabs-3" ? "block" : "none" }}>
                                 <img src={traning3} alt="Third Class" />
                                 <h4>Third Training Class</h4>
                                 <h6>(Hector T. Daigl)</h6>
                                 <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit amet.</p>
-                                <div className={styles["main-button"]}>
-                                    <a href="#">View Schedule
-                                    </a>
-                                    {userData.email && <button>Book Program</button>}
-                                </div>
                             </article>
+
                             <article id='tabs-4' style={{ display: activeTab === "tabs-4" ? "block" : "none" }}>
                                 <img src={traning4} alt="Fourth Training" />
                                 <h4>Fourth Training Class</h4>
                                 <h6>(Bret D. Bowers)</h6>
                                 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tur.</p>
-                                <div className={styles["main-button"]}>
-                                    <a href="#">View Schedule
-                                    </a>
-                                    {userData.email && <button>Book Program</button>}
-                                </div>
                             </article>
                         </section>
                     </div>

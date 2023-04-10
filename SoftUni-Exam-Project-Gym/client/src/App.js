@@ -13,9 +13,7 @@ import { CallToAction } from './components/CallToAction';
 import { Trainers } from './components/Trainers';
 import { ContakUsArea } from './components/ContaktUsArea';
 import { Classes } from "./components/Classes";
-import { Schedules } from "./components/Schedules";
 // import { Programs } from "./components/Programs";
-import { MySchedules } from './components/MySchedules';
 import { PlansCatalog } from './components/PlansCatalog';
 import { PageNotFound } from './components/PageNotFound';
 import { Test } from './components/Test';
@@ -62,19 +60,20 @@ function App() {
             });
     }
 
-    const addComment = (planId, comment) => {
-        setTrainingPlans(state => {
-            const game = state.find(x => x._id == planId);
 
-            const comments = game.comments || [];
-            comments.push(comment)
+    // const addComment = (planId, comment) => {
+    //     setTrainingPlans(state => {
+    //         const game = state.find(x => x._id == planId);
 
-            return [
-                ...state.filter(x => x._id !== planId),
-                { ...game, comments },
-            ];
-        });
-    };
+    //         const comments = game.comments || [];
+    //         comments.push(comment)
+
+    //         return [
+    //             ...state.filter(x => x._id !== planId),
+    //             { ...game, comments },
+    //         ];
+    //     });
+    // };
 
     const addPlan = (planData) => {
         setTrainingPlans(state => [
@@ -117,21 +116,18 @@ function App() {
                     <Route path="/trainers" element={<Trainers />} />
                     {/* <Route path="/programs" element={<Programs />} /> */}
                     <Route path="/classes" element={<Classes />} />
-                    <Route path="/schedules" element={<Schedules />} />
                     <Route path="/contact" element={<ContakUsArea />} />
-                    <Route path="/mySchedules" element={<MySchedules />} />
                     <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
                     <Route path="/TestPage" element={<Test />} />
                     <Route path="/profil" element={<Profil userData={userData} />} />
-
 
                     <Route path="/createPlan" element={<CreatePlan />} />
                     <Route path="/plans/:planId/edit" element={<EditPlan />} />
                     <Route path="/plans/:planId/details"
                         element={<PlanDetails
                             plans={trainingPlans}
-                            addComment={addComment}
+                            // addComment={addComment}
                             fetchTrainingPlans={fetchTrainingPlans}
                         />}
                     />

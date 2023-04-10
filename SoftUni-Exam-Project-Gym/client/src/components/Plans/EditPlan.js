@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
-
+import styles from '../../imported-elements/css/global-stayles.module.css'
 
 
 export const EditPlan = () => {
@@ -69,7 +69,7 @@ export const EditPlan = () => {
                     </label>
 
                     <input
-                        className={createPlanCSS["submitBtn"]}
+                        className={styles["buttons"]}
                         type="submit"
                         value="Edit Plan"
                     />

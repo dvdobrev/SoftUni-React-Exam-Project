@@ -1,4 +1,4 @@
-import catalogItemCSS from '../../imported-elements/css/catalogItem.module.css';
+import catalogItemCSS from '../../imported-elements/css/catalog.module.css';
 import { Link } from 'react-router-dom';
 import CalendarIcon from '../../imported-elements/images/calendarIcon.png'
 import LevelIcon from '../../imported-elements/images/level.png'
@@ -10,7 +10,7 @@ export const CatalogItem = ({ plan }) => {
         <div className={catalogItemCSS["card"]}>
             <div className={catalogItemCSS["info"]}>
                 <div>
-                    <img src={LevelIcon} alt="Calendar icon" />
+                    <img id={`${catalogItemCSS["level-img"]}`} src={LevelIcon} alt="Level icon" />
                 </div>
                 <h4>{plan.level}</h4>
             </div>
@@ -21,7 +21,7 @@ export const CatalogItem = ({ plan }) => {
                 <h4>{plan.days} times per week</h4>
             </div>
 
-            <Link to={`/plans/${plan._id}/details`} className="details-button">
+            <Link to={`/plans/${plan._id}/details`} className={`${catalogItemCSS["details-button"]}`}>
                 Details
             </Link>
 
