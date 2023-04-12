@@ -11,8 +11,6 @@ import "../imported-elements/css/font-awesome.css";
 import { NavLink } from 'react-router-dom';
 
 
-//TODO: Add the comments here like recensions for the trainers
-
 export const Trainers = () => {
 
     return (

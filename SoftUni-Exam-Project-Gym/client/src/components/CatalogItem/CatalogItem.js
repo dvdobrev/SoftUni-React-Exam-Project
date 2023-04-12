@@ -12,7 +12,7 @@ export const CatalogItem = ({ plan }) => {
                 <div>
                     <img id={`${catalogItemCSS["level-img"]}`} src={LevelIcon} alt="Level icon" />
                 </div>
-                <h4>{plan.level}</h4>
+                <h4>Level: {plan.level}</h4>
             </div>
             <div className={catalogItemCSS["info"]}>
                 <div>
