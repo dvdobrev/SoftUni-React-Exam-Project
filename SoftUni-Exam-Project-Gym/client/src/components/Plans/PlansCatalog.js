@@ -1,7 +1,5 @@
-import { CatalogItem } from "./CatalogItem/CatalogItem";
-import catalogCSS from '../imported-elements/css/catalog.module.css';
-import headerCSS from '../imported-elements/css/header.module.css';
-
+import { CatalogItem } from "../CatalogItem/CatalogItem";
+import catalogCSS from '../../imported-elements/css/catalog.module.css';
 
 export const PlansCatalog = ({ trainingPlans }) => {
 

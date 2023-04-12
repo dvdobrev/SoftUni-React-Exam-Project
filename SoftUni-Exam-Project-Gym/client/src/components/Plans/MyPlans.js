@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 
-import { CatalogItem } from "./CatalogItem/CatalogItem";
-import catalogCSS from '../imported-elements/css/catalog.module.css';
-import headerCSS from '../imported-elements/css/header.module.css';
+import { CatalogItem } from "../CatalogItem/CatalogItem";
+// import catalogCSS from '../imported-elements/css/catalog.module.css';
+import catalogCSS from '../../imported-elements/css/catalog.module.css';
 
 
 
@@ -26,7 +26,6 @@ export const MyPlans = () => {
                     ? userPlans.map(plan => <CatalogItem key={plan._id} plan={plan} />)
                     : <h3 className="no-articles">No plans yet</h3>
                 }
-
             </div>
         </section>
     );
