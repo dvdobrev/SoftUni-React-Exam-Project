@@ -16,13 +16,12 @@ import { Classes } from "./components/Classes";
 // import { Programs } from "./components/Programs";
 import { PlansCatalog } from './components/PlansCatalog';
 import { PageNotFound } from './components/PageNotFound';
-import { Test } from './components/Test';
 import { Profil } from './components/Profil';
-
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
 import { Logout } from './components/Logout';
 
+import { MyPlans } from './components/MyPlans';
 import { CreatePlan } from "./components/Plans/CreatePlan";
 import { EditPlan } from './components/Plans/EditPlan';
 import { PlanDetails } from './components/Plans/PlanDetails';
@@ -33,8 +32,11 @@ import { Footer } from './components/Footer';
 function App() {
 
     const [trainingPlans, setTrainingPlans] = useState([]);
+    const [userPlans, setUserPlans] = useState([]);
 
     const [userData, setUserData] = useLocalStorage('userData', {});
+    const ownerId = userData._id;
+
     const navigate = useNavigate();
 
 
@@ -53,12 +55,34 @@ function App() {
             });
     }, []);
 
-    const fetchTrainingPlans = () => {
+    useEffect(() => {
+        const allPlans = (ownerId) => {
+            traingPlanService.getAll()
+                .then(result => {
+                    const userPlans = result.filter(plan => plan._ownerId === ownerId);
+                    setUserPlans(userPlans);
+                });
+        }
+
+        allPlans(ownerId);
+    }, [ownerId]);
+
+    const fetchallPlans = () => {
         traingPlanService.getAll()
             .then(result => {
                 setTrainingPlans(result);
             });
     }
+
+    const fetchUserPlans = (ownerId) => {
+            traingPlanService.getAll()
+                .then(result => {
+                    const userPlans = result.filter(plan => plan._ownerId === ownerId);
+                    setUserPlans(userPlans);
+                });
+        }
+    
+
 
 
     // const addComment = (planId, comment) => {
@@ -84,6 +108,15 @@ function App() {
 
     };
 
+    const addUserPlan = (planData) => {
+        setUserPlans(state => [
+            ...state,
+            planData,
+        ]);
+        navigate('/plansCatalog');
+
+    };
+
     const editPlan = (planId, planData) => {
         setTrainingPlans(state => state.map(plan => plan._id === planId ? planData : plan));
     }
@@ -97,8 +130,11 @@ function App() {
                 userDataHandler: userDataHandler,
                 logoutHandler,
                 trainingPlans,
-                fetchTrainingPlans,
+                fetchallPlans,
+                fetchUserPlans,
+                userPlans,
                 addPlan,
+                addUserPlan,
                 editPlan,
             }}
         >
@@ -119,31 +155,20 @@ function App() {
                     <Route path="/contact" element={<ContakUsArea />} />
                     <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
                     <Route path="/PageNotFound" element={<PageNotFound />} />
-                    <Route path="/TestPage" element={<Test />} />
                     <Route path="/profil" element={<Profil userData={userData} />} />
 
+                    <Route path="/myPlans" element={<MyPlans userPlans={userPlans} />} />
                     <Route path="/createPlan" element={<CreatePlan />} />
                     <Route path="/plans/:planId/edit" element={<EditPlan />} />
                     <Route path="/plans/:planId/details"
                         element={<PlanDetails
                             plans={trainingPlans}
-                            // addComment={addComment}
-                            fetchTrainingPlans={fetchTrainingPlans}
                         />}
                     />
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/logout" element={<Logout />} />
-
-                    {/* <Route path="/pricing/*" element={<Pricing />} />
-                <Route path="/pricing/premium" element={<h2>Premium Pricing</h2>} />
-                <Route path="/contacts" element={<Contacts />} />
-
-                <Route path="/starships" element={<StarshipList />} />
-                <Route path="/starships/:starshipId/*" element={<Starship />} />
-                <Route path="/millennium-falcon" element={<Navigate to="/products/10" replace />} />
-                <Route path="*" element={<NotFound />} /> */}
                 </Routes>
                 <Footer />
 

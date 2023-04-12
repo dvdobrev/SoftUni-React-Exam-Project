@@ -9,15 +9,15 @@ import styles from '../../imported-elements/css/global-stayles.module.css'
 
 export const PlanDetails = ({
     addComment,
-    fetchTrainingPlans,
 }) => {
 
     const [showConfirm, setShowConfirm] = useState(false);
     const { planId } = useParams();
     const [currentPlan, setCurrentPlan] = useState({});
+
     const navigate = useNavigate();
 
-    const { userData } = useContext(UserContext);
+    const { userData, fetchallPlans, fetchUserPlans } = useContext(UserContext);
     const ownerId = userData._id;
     const planOwnerId = currentPlan._ownerId;
 
@@ -99,10 +99,11 @@ export const PlanDetails = ({
     const deletePlanHandler = () => {
         planServices.deleteOne(planId)
             .then(() => {
-                fetchTrainingPlans();
+                fetchallPlans();
+                fetchUserPlans(ownerId);
                 setShowConfirm(false);
                 planServices.deleteAllComments(planId);
-                navigate(`/plansCatalog`);
+                navigate(`/myPlans`);
             });
     };
 
