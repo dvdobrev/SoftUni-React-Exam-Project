@@ -167,17 +167,6 @@ export const Register = () => {
 
             <form onSubmit={onSubmit} id={loginRegisterCSS["lr-form"]}>
 
-                {/* <label htmlFor="firstName">First name</label>
-            <div className="input-wrapper">
-                <span><i className="fa-solid fa-user"></i></span>
-                <input id="firstName" name="firstName" type="text" value={values.firstName} onChange={changeHandler} onBlur={(e) => minLength(e, 3)} />
-            </div>
-            {errors.firstName &&
-                <p className="form-error">
-                    First name should be at least 3 characters long!
-                </p>
-            } */}
-
                 <div className="form-outline mb-0">
                     <div className="form-outline">
 

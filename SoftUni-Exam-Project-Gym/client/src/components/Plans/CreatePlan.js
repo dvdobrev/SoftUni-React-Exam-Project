@@ -70,9 +70,6 @@ export const CreatePlan = () => {
             ...state,
             textErrorMessage: message,
         }));
-
-
-
     }
 
     return (

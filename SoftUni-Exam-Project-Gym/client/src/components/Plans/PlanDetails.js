@@ -7,6 +7,8 @@ import detailsCSS from '../../imported-elements/css/details.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
 
+//TODO: Make error handling
+
 export const PlanDetails = ({
     addComment,
 }) => {
@@ -25,8 +27,6 @@ export const PlanDetails = ({
     const [comment, setComment] = useState('');
     const [allComments, setAllComments] = useState([]);
 
-
-
     const [error, setError] = useState({
         username: '',
         comment: '',
@@ -39,17 +39,20 @@ export const PlanDetails = ({
                 setAllComments(filteredComments);
             })
             .catch(error => {
-                // Handle any errors that occurred while fetching or filtering comments
+                navigate("/PageNotFound");
             });
-    }, [planId]);
+    }, [planId, navigate]);
 
 
     useEffect(() => {
         planServices.getOne(planId)
             .then(result => {
-                setCurrentPlan(result);
+                setCurrentPlan(result)
+            .catch(error => {
+                navigate("/PageNotFound");
             });
-    }, []);
+        });
+    }, [planId, navigate]);
 
     const addCommentHandler = (e) => {
         e.preventDefault();

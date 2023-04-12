@@ -60,12 +60,15 @@ function App() {
             traingPlanService.getAll()
                 .then(result => {
                     const userPlans = result.filter(plan => plan._ownerId === ownerId);
-                    setUserPlans(userPlans);
+                    setUserPlans(userPlans)
+                .catch(error => {
+                    navigate("/PageNotFound");
                 });
+            });
         }
 
         allPlans(ownerId);
-    }, [ownerId]);
+    }, [ownerId, navigate]);
 
     const fetchallPlans = () => {
         traingPlanService.getAll()
@@ -75,13 +78,13 @@ function App() {
     }
 
     const fetchUserPlans = (ownerId) => {
-            traingPlanService.getAll()
-                .then(result => {
-                    const userPlans = result.filter(plan => plan._ownerId === ownerId);
-                    setUserPlans(userPlans);
-                });
-        }
-    
+        traingPlanService.getAll()
+            .then(result => {
+                const userPlans = result.filter(plan => plan._ownerId === ownerId);
+                setUserPlans(userPlans);
+            });
+    }
+
 
 
 

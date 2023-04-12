@@ -1,6 +1,6 @@
 export const PageNotFound = () => {
 
-    //TODO: Edit this page
+    //TODO: Edit this page if the user search not existing page
     return (
         <div>
             <br></br>
@@ -10,7 +10,7 @@ export const PageNotFound = () => {
 
             <br></br>
 
-            <h1> PAGE NOT FOUND DOBRI</h1>
+            <h1> PAGE NOT FOUND </h1>
         </div>
     );
 };
