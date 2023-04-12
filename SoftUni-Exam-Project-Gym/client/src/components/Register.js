@@ -23,6 +23,7 @@ export const Register = () => {
         comment: '',
     });
 
+
     const [password, setPassword] = useState({
         password: '',
         repeatPassowrd: ''
@@ -30,6 +31,13 @@ export const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        const hasErrors = Object.values(error).some((message) => message !== '');
+
+        if(hasErrors) {
+            return;
+        }
+
 
         const formData = new FormData(e.target);
 
@@ -103,7 +111,6 @@ export const Register = () => {
     };
 
 
-    // TODO: Check if there is possible to submit form with empty password,email ...
     //TODO: Search and delete the console.log in whole project -> crl + shft + H
 
     const passwordValidation = (e) => {
