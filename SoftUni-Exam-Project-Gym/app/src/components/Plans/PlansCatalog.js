@@ -4,9 +4,12 @@ import catalogCSS from '../../imported-elements/css/catalog.module.css';
 export const PlansCatalog = ({ trainingPlans }) => {
 
     return (
-        //TODO: Make Page where the user can add Memos, for example starting kg, kg on day x, time spending in the jim und more
         //TODO: Make if user type in the browser ../myTrainingPlan, to go to the login if the user is not loged in
-
+        //TODO: Make Guard for the todo above
+        //TODO: make deployment
+        //TODO: Delete the comments from database after delete a plan
+        //TODO: make client side rendering for the comments
+        //TODO: Edit the Register form, it brokes when the user invalid input
         <section id={`${catalogCSS["catalog-page"]}`}>
 
             <br></br>

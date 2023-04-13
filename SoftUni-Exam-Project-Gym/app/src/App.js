@@ -61,9 +61,6 @@ function App() {
                 .then(result => {
                     const userPlans = result.filter(plan => plan._ownerId === ownerId);
                     setUserPlans(userPlans)
-                .catch(error => {
-                    navigate("/PageNotFound");
-                });
             });
         }
 

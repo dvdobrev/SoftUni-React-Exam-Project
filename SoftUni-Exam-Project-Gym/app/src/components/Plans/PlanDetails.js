@@ -7,8 +7,6 @@ import detailsCSS from '../../imported-elements/css/details.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
 
-//TODO: Make error handling
-
 export const PlanDetails = ({
     addComment,
 }) => {
@@ -48,9 +46,9 @@ export const PlanDetails = ({
         planServices.getOne(planId)
             .then(result => {
                 setCurrentPlan(result)
-            .catch(error => {
-                navigate("/PageNotFound");
-            });
+            // .catch(error => {
+            //     navigate("/PageNotFound");
+            // });
         });
     }, [planId, navigate]);
 

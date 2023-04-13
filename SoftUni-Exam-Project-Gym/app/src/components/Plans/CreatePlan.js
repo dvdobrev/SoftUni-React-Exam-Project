@@ -57,8 +57,8 @@ export const CreatePlan = () => {
         let message = '';
 
         const wordCount = text.split(/\s+/).length;
-        if (wordCount < 10) {
-            message = 'Text should contain at least 10 charakters';
+        if (wordCount < 4) {
+            message = 'Text should contain at least 4 charakters';
             setError(state => ({
                 ...state,
                 textErrorMessage: message,
