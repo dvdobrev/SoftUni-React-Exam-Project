@@ -15,6 +15,11 @@ export const EditPlan = () => {
     const { planId } = useParams();
     const navigate = useNavigate();
 
+    const [error, setError] = useState({
+        daysErrorMessage: '',
+        textErrorMessage: ''
+    });
+
     useEffect(() => {
         planServices.getOne(planId)
             .then(planData => {
@@ -30,50 +35,106 @@ export const EditPlan = () => {
         planServices.edit(planId, planData)
             .then(result => {
                 editPlan(planId, result);
-                navigate(`/plansCatalog`)
+                navigate(`/myPlans`)
             });
     };
 
+    const isDigitValidation = (e) => {
+        const days = e.target.value
+        let message = '';
+
+        // I use here regex, because if I use isNan() instead, if I
+        // write isNaN('1e1000'), this will be accepted as number
+        if (!/^\d+$/.test(days)) {
+            message = 'Days should contain ONLY digits';
+
+            setError(state => ({
+                ...state,
+                daysErrorMessage: message,
+            }));
+        }
+
+        setError(state => ({
+            ...state,
+            daysErrorMessage: message,
+        }));
+    };
+
+    const minTextValidation = (e) => {
+        const text = e.target.value;
+        let message = '';
+
+        const wordCount = text.split(/\s+/).length;
+        if (wordCount < 4) {
+            message = 'Text should contain at least 4 words';
+            setError(state => ({
+                ...state,
+                textErrorMessage: message,
+            }));
+
+        }
+
+        setError(state => ({
+            ...state,
+            textErrorMessage: message,
+        }));
+    }
+
+
     return (
-        <section>
+        <section className={`${createPlanCSS["createPlaneSection"]}`}>
             <br></br>
             <br></br>
             <br></br>
             <br></br>
             <br></br>
-            <form id="edit" onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} id={createPlanCSS["create-plan-form"]}>
                 <div className={createPlanCSS["createPlan"]}>
                     <h1>Edit Plan</h1>
 
                     <label htmlFor="level">
                         Level:
-                        <select name="level">
+                        <select id="tag" name="level" defaultValue="" required>
+                            <option value="" disabled hidden>
+                                Select level
+                            </option>
                             <option value="beginner">beginner</option>
                             <option value="advanced">advanced</option>
                             <option value="profi">profi</option>
                         </select>
                     </label>
 
-                    <label htmlFor="days">Days:
+                    <label htmlFor="days">Days per week:
                         <input
                             type="text"
                             name="days"
-                            defaultValue={currentPlan.days} />
+                            defaultValue={currentPlan.days}
+                            onBlur={isDigitValidation}
+                            required
+                        />
+                        {error.daysErrorMessage
+                            ? <span style={{ color: 'red' }}>{error.daysErrorMessage}</span>
+                            : <span></span>
+                        }
                     </label>
 
                     <label htmlFor="description">Description:
                         <textarea
                             name="description"
                             defaultValue={currentPlan.description}
+                            onBlur={minTextValidation}
+                            required
                         />
+                        {error && <span style={{ color: 'red' }}>{error.textErrorMessage}</span>}
                     </label>
 
-                    <input
-                        className={styles["buttons"]}
-                        type="submit"
-                        value="Edit Plan"
-                    />
-
+                    <div className={createPlanCSS["submit-container"]}>
+                        <input
+                            className={styles["buttons"]}
+                            type="submit"
+                            value="Edit Plan"
+                        />
+                    </div>
                 </div>
             </form>
         </section>
