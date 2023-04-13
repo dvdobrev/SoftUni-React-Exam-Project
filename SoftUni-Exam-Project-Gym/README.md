@@ -23,7 +23,7 @@ The users of the app can:
 **Softuni practice server** ( https://github.com/softuni-practice-server/softuni-practice-server#collections ) 
 -	**NOTE:** CRUD operations for the collections use other links than those described in the server documentation:
     -	http://localhost:3030/data/plans
-    - http://localhost:3030/data/comments
+    -   http://localhost:3030/data/comments
 
 # How to start it?
 -	Start terminal from the client folder do npm start
@@ -31,4 +31,4 @@ The users of the app can:
 
 
 # Deployment
-You can try out the app on ……….
+You can try out the app on https://project-gym-24441.firebaseapp.com/
