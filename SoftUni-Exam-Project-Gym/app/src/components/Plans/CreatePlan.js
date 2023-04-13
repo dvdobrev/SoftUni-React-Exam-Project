@@ -23,7 +23,6 @@ export const CreatePlan = () => {
         }
 
         const planData = Object.fromEntries(new FormData(e.target));
-        console.log(planData);
 
         planServices.create(planData).then((result) => {
             addPlan(result);
@@ -58,7 +57,7 @@ export const CreatePlan = () => {
 
         const wordCount = text.split(/\s+/).length;
         if (wordCount < 4) {
-            message = 'Text should contain at least 4 charakters';
+            message = 'Text should contain at least 4 words';
             setError(state => ({
                 ...state,
                 textErrorMessage: message,
