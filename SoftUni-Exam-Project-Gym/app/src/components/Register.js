@@ -174,17 +174,13 @@ export const Register = () => {
                             type="text"
                             name="firstName"
                             size={30}
-                            placeholder="First Name"
+                            placeholder="First Name (optional)"
                             onBlur={firstnameValidation}
                         />
 
                         {error.firstnameErrorMessage &&
                             <div style={{ color: 'white' }}>{error.firstnameErrorMessage}</div>
                         }
-
-                        <br />
-                        <br />
-
                     </div>
                 </div>
 
@@ -194,16 +190,13 @@ export const Register = () => {
                             type="text"
                             name="lastName"
                             size={30}
-                            placeholder="Last Name"
+                            placeholder="Last Name (optional)"
                             onBlur={lastnameValidation}
                         />
 
                         {error.lastnameErrorMessage &&
                             <div style={{ color: 'white' }}>{error.lastnameErrorMessage}</div>
                         }
-
-                        <br />
-                        <br />
                     </div>
                 </div>
 
@@ -220,9 +213,6 @@ export const Register = () => {
                         {error.emailErrorMessage &&
                             <div style={{ color: 'white' }}>{error.emailErrorMessage}</div>
                         }
-
-                        <br />
-                        <br />
                     </div>
                 </div>
 
@@ -239,8 +229,6 @@ export const Register = () => {
                         {error.passwordErrorMessage &&
                             <div style={{ color: 'white' }}>{error.passwordErrorMessage}</div>
                         }
-                        <br />
-                        <br />
                     </div>
                 </div>
 
@@ -256,9 +244,6 @@ export const Register = () => {
                         {error.matchPasswordErrorMessage &&
                             <div style={{ color: 'white' }}>{error.matchPasswordErrorMessage}</div>
                         }
-
-                        <br />
-                        <br />
                     </div>
                 </div>
 
