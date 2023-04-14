@@ -14,8 +14,7 @@ import traning4 from "../imported-elements/images/training-image-04.jpg";
 
 export const Classes = () => {
 
-    const [activeTab, setActiveTab] = useState('tabs-1'); // set the initial active tab to the first tab
-
+    const [activeTab, setActiveTab] = useState('tabs-1');
     const showTab = (tabId) => {
         setActiveTab(tabId);
     }
