@@ -12,7 +12,8 @@
     align-items: center;
 }
 
-#lr-form {
+#register-form,
+#login-form {
     width: 26%;
     min-height: 70%;
     background-color: #1d3b99a1;
@@ -27,4 +28,12 @@
 
 .button {
     margin-bottom: 18px;
+}
+
+.form-outline {
+    margin-bottom: 14px;
+}
+
+#login-form {
+    min-height: 50%;
 }

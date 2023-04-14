@@ -39,21 +39,17 @@ export const Login = () => {
         <div className={loginRegisterCSS["registerContainer"]}>
             <h1>Login </h1>
 
-            <form onSubmit={onSubmit} id={loginRegisterCSS["lr-form"]}>
+            <form onSubmit={onSubmit} id={loginRegisterCSS["login-form"]}>
 
                 <div className="form-outline mb-0">
                     <div className="form-outline">
                         <input type="email" name="email" size={30} placeholder="Email" />
-                        <br />
-                        <br />
                     </div>
                 </div>
 
                 <div className="form-outline mb-0">
                     <div className="form-outline">
                         <input type="password" name="password" size={30} placeholder="Password" />
-                        <br />
-                        <br />
                     </div>
                 </div>
 

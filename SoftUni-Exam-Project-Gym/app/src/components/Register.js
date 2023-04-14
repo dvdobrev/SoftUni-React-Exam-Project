@@ -165,7 +165,7 @@ export const Register = () => {
         <div className={loginRegisterCSS["registerContainer"]}>
             <h1>Sign Up</h1>
 
-            <form onSubmit={onSubmit} id={loginRegisterCSS["lr-form"]}>
+            <form onSubmit={onSubmit} id={loginRegisterCSS["register-form"]}>
 
                 <div className="form-outline mb-0">
                     <div className="form-outline">
@@ -248,7 +248,6 @@ export const Register = () => {
                 </div>
 
                 <button className={`${styles["buttons"]} ${loginRegisterCSS["button"]}`} type="text" name="firstName"> Sign up </button>
-
             </form>
         </div>
     );
