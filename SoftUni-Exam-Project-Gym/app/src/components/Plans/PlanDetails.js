@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
+import { PlanContext } from "../../contexts/PlanContext";
 
 import * as planServices from '../../services/trainingPlanService';
 import detailsCSS from '../../imported-elements/css/details.module.css';
@@ -16,8 +16,7 @@ export const PlanDetails = (
 
     const navigate = useNavigate();
 
-    const { userData, fetchallPlans, fetchUserPlans } = useContext(UserContext);
-    const ownerId = userData._id;
+    const { ownerId, fetchallPlans, fetchUserPlans } = useContext(PlanContext);
     const planOwnerId = currentPlan._ownerId;
 
     const [username, setUsername] = useState('');
@@ -172,7 +171,7 @@ export const PlanDetails = (
             </div>
 
 
-            {userData.email &&
+            {ownerId &&
                 <article className={detailsCSS["create-comment"]}>
                     <label>Add new comment:</label>
                     <form className={detailsCSS["form"]} onSubmit={addCommentHandler}>

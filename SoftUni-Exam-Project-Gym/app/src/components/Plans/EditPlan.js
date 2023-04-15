@@ -1,17 +1,17 @@
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../../contexts/UserContext";
+import { PlanContext } from "../../contexts/PlanContext";
 
 import { useParams, useNavigate } from 'react-router-dom';
 
 import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
-import styles from '../../imported-elements/css/global-stayles.module.css'
+import styles from '../../imported-elements/css/global-stayles.module.css';
 
 
 export const EditPlan = () => {
 
     const [currentPlan, setCurrentPlan] = useState({});
-    const { editPlan } = useContext(UserContext);
+    const { editPlan } = useContext(PlanContext);
     const { planId } = useParams();
     const navigate = useNavigate();
 
@@ -84,16 +84,10 @@ export const EditPlan = () => {
 
 
     return (
-        <section className={`${createPlanCSS["createPlaneSection"]}`}>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+        <section className={`${createPlanCSS["createPlanSection"]}`}>
+            <h1>Edit Plan</h1>
             <form onSubmit={onSubmit} id={createPlanCSS["create-plan-form"]}>
                 <div className={createPlanCSS["createPlan"]}>
-                    <h1>Edit Plan</h1>
-
                     <label htmlFor="level">
                         Level:
                         <select id="tag" name="level" defaultValue="" required>
@@ -129,15 +123,16 @@ export const EditPlan = () => {
                         />
                         {error && <span style={{ color: 'red' }}>{error.textErrorMessage}</span>}
                     </label>
-
-                    <div className={createPlanCSS["submit-container"]}>
-                        <input
-                            className={styles["buttons"]}
-                            type="submit"
-                            value="Edit Plan"
-                        />
-                    </div>
                 </div>
+
+                <div className={createPlanCSS["submit-div"]}>
+                    <input
+                        className={styles["buttons"]}
+                        type="submit"
+                        value="Edit Plan"
+                    />
+                </div>
+
             </form>
         </section>
     );

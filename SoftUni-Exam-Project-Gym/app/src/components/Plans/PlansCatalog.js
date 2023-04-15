@@ -1,20 +1,25 @@
+import { useContext } from "react";
+
 import { CatalogItem } from "../CatalogItem/CatalogItem";
 import catalogCSS from '../../imported-elements/css/catalog.module.css';
 
-export const PlansCatalog = ({ trainingPlans }) => {
+import { PlanContext } from "../../contexts/PlanContext";
+
+export const PlansCatalog = () => {
+
+    const {trainingPlans} = useContext(PlanContext);
+    const {userPlans} = useContext(PlanContext);
+
+    console.log(userPlans);
+    console.log(trainingPlans);
 
     return (
-        //TODO: Make if user type in the browser ../myTrainingPlan, to go to the login if the user is not loged in
-        //TODO: Make Guard for the todo above
-        //TODO: make deployment
         //TODO: Delete the comments from database after delete a plan
         //TODO: make client side rendering for the comments
-        //TODO: Edit the Register form, it brokes when the user invalid input
-        <section id={`${catalogCSS["catalog-page"]}`}>
+        //TODO: delete the comments from training plan services
 
-            <br></br>
-            <br></br>
-            <br></br>
+
+        <section id={`${catalogCSS["catalog-page"]}`}>
 
             <h1>All Plans</h1>
 
