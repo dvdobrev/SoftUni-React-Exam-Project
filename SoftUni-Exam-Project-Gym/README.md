@@ -27,8 +27,8 @@ The users of the app can:
     -   http://localhost:3030/data/comments
 
 # How to start it?
--	Start terminal from the client folder do npm start
--	Start terminal from the server folder do node server.js
+-	Start terminal from the client folder do ***npm start***
+-	Start terminal from the server folder do ***node server.js***
 
 
 # Deployment
