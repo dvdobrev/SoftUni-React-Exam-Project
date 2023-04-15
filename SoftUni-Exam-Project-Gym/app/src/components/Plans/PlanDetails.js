@@ -7,9 +7,8 @@ import detailsCSS from '../../imported-elements/css/details.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
 
-export const PlanDetails = ({
-    addComment,
-}) => {
+export const PlanDetails = (
+) => {
 
     const [showConfirm, setShowConfirm] = useState(false);
     const { planId } = useParams();
@@ -36,7 +35,7 @@ export const PlanDetails = ({
             .then(filteredComments => {
                 setAllComments(filteredComments);
             })
-            .catch(error => {
+            .catch((error) => {
                 navigate("/PageNotFound");
             });
     }, [planId, navigate]);
@@ -46,10 +45,11 @@ export const PlanDetails = ({
         planServices.getOne(planId)
             .then(result => {
                 setCurrentPlan(result)
-            // .catch(error => {
-            //     navigate("/PageNotFound");
-            // });
-        });
+            })
+            .catch((error) => {
+                navigate(`/pageNotFound`)
+            });
+
     }, [planId, navigate]);
 
     const addCommentHandler = (e) => {
@@ -61,8 +61,9 @@ export const PlanDetails = ({
                 setAllComments((prevComments) => [...prevComments, newComment]);
                 setUsername('');
                 setComment('');
-            })
-            .catch((error) => console.error(error));
+            }).catch((error) => {
+                navigate(`/pageNotFound`)
+            });
     };
 
     const onChangeUsername = (e) => {
