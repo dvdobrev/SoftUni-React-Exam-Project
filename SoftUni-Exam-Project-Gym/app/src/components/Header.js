@@ -10,7 +10,7 @@ import headerCSS from "../imported-elements/css/header.module.css";
 import "../imported-elements/css/bootstrap.min.css";
 import "../imported-elements/css/font-awesome.css";
 
-export const Header = ({ navigationChangeHandler }) => {
+export const Header = () => {
 
     const { userData } = useContext(UserContext)
 

@@ -10,7 +10,6 @@ import styles from '../imported-elements/css/global-stayles.module.css';
 export const ContakUsArea = () => {
 
     const [visible, setVisible] = useState(false);
-    const isVisible = false;
 
     const [formData, setFormData] = useState({
         name: "",
@@ -51,7 +50,6 @@ export const ContakUsArea = () => {
     };
 
     const showHideMessage = () => {
-        // isVisible = true;
         setVisible(true);
         setTimeout(() => {
             setVisible(false);
