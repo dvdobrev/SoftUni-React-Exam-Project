@@ -13,6 +13,10 @@ export const deleteOne = (planId) => request.remove(`${baseUrl}/${planId}`);
 
 export const create = (planData) => request.post(baseUrl, planData);
 
+    //this is to test if the catch is working properly
+// export const create = (planData) => Promise.reject('Intentional error');
+
+
 export const edit = (planId, planData) => request.put(`${baseUrl}/${planId}`, planData);
 
 

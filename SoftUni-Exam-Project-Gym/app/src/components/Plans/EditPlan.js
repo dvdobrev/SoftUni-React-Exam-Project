@@ -36,6 +36,8 @@ export const EditPlan = () => {
             .then(result => {
                 editPlan(planId, result);
                 navigate(`/myPlans`)
+            }).catch((error) => {
+                navigate(`/pageNotFound`)
             });
     };
 

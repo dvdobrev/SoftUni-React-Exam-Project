@@ -1,10 +1,15 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
+
 export const CreatePlan = () => {
+
+    const navigate = useNavigate();
+
 
     const [error, setError] = useState({
         daysErrorMessage: '',
@@ -23,10 +28,13 @@ export const CreatePlan = () => {
         }
 
         const planData = Object.fromEntries(new FormData(e.target));
+        // const planData = "test plan";
 
         planServices.create(planData).then((result) => {
             addPlan(result);
             addUserPlan(result);
+        }).catch((error) => {
+            navigate(`/pageNotFound`)
         });
     };
 
@@ -125,6 +133,10 @@ export const CreatePlan = () => {
                     />
                 </div>
             </form>
+
+            <button onClick={() => onSubmit({ preventDefault: () => { } })}>
+                Test Submit
+            </button>
         </section>
     );
 };

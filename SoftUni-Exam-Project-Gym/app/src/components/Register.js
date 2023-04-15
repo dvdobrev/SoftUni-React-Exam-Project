@@ -38,7 +38,6 @@ export const Register = () => {
             return;
         }
 
-
         const formData = new FormData(e.target);
 
         const email = formData.get('email');
@@ -64,7 +63,9 @@ export const Register = () => {
         })
         .then(() => {
             navigate('/');
-        });        
+        }).catch((error) => {
+            navigate(`/pageNotFound`)
+        });   
     }
 
     const firstnameValidation = (e) => {
