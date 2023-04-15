@@ -10,7 +10,6 @@ export const CreatePlan = () => {
 
     const navigate = useNavigate();
 
-
     const [error, setError] = useState({
         daysErrorMessage: '',
         textErrorMessage: ''
@@ -28,7 +27,6 @@ export const CreatePlan = () => {
         }
 
         const planData = Object.fromEntries(new FormData(e.target));
-        // const planData = "test plan";
 
         planServices.create(planData).then((result) => {
             addPlan(result);
@@ -134,9 +132,6 @@ export const CreatePlan = () => {
                 </div>
             </form>
 
-            <button onClick={() => onSubmit({ preventDefault: () => { } })}>
-                Test Submit
-            </button>
         </section>
     );
 };
