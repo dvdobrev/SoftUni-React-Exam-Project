@@ -8,8 +8,6 @@ export const RoutGuard = () => {
 
     const { userData } = useContext(UserContext);
 
-    console.log(userData.email);
-
     if (!userData.email) {
         return <Navigate to="/login" replace />
     }
