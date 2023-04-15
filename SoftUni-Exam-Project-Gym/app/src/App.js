@@ -27,6 +27,7 @@ import { EditPlan } from './components/Plans/EditPlan';
 import { PlanDetails } from './components/Plans/PlanDetails';
 
 import { Footer } from './components/Footer';
+import { RoutGuard } from './routGuards/RoutGuard';
 
 
 function App() {
@@ -56,15 +57,15 @@ function App() {
     }, []);
 
     useEffect(() => {
-        const allPlans = (ownerId) => {
+        const getAllOwnPlans = (ownerId) => {
             traingPlanService.getAll()
                 .then(result => {
                     const userPlans = result.filter(plan => plan._ownerId === ownerId);
                     setUserPlans(userPlans)
-            });
+                });
         }
 
-        allPlans(ownerId);
+        getAllOwnPlans(ownerId);
     }, [ownerId, navigate]);
 
     const fetchallPlans = () => {
@@ -81,23 +82,6 @@ function App() {
                 setUserPlans(userPlans);
             });
     }
-
-
-
-
-    // const addComment = (planId, comment) => {
-    //     setTrainingPlans(state => {
-    //         const game = state.find(x => x._id == planId);
-
-    //         const comments = game.comments || [];
-    //         comments.push(comment)
-
-    //         return [
-    //             ...state.filter(x => x._id !== planId),
-    //             { ...game, comments },
-    //         ];
-    //     });
-    // };
 
     const addPlan = (planData) => {
         setTrainingPlans(state => [
@@ -121,6 +105,8 @@ function App() {
         setTrainingPlans(state => state.map(plan => plan._id === planId ? planData : plan));
     }
 
+    //TODO: Replace the logic above in some provider, and get it from there
+    // Video 22.07.2022 , 01.18.00h ili ostavat 02.21.00h
 
     return (
 
@@ -154,12 +140,14 @@ function App() {
                     <Route path="/classes" element={<Classes />} />
                     <Route path="/contact" element={<ContakUsArea />} />
                     <Route path="/plansCatalog" element={<PlansCatalog trainingPlans={trainingPlans} />} />
-                    <Route path="/PageNotFound" element={<PageNotFound />} />
-                    <Route path="/profil" element={<Profil userData={userData} />} />
+                    <Route path="/pageNotFound" element={<PageNotFound />} />
+                    {/* <Route path="/profil" element={<Profil userData={userData} />} /> */}
 
-                    <Route path="/myPlans" element={<MyPlans userPlans={userPlans} />} />
-                    <Route path="/createPlan" element={<CreatePlan />} />
-                    <Route path="/plans/:planId/edit" element={<EditPlan />} />
+                    <Route element={<RoutGuard />}>
+                        <Route path="/myPlans" element={<MyPlans userPlans={userPlans} />} />
+                        <Route path="/createPlan" element={<CreatePlan />} />
+                        <Route path="/plans/:planId/edit" element={<EditPlan />} />
+                    </Route>
                     <Route path="/plans/:planId/details"
                         element={<PlanDetails
                             plans={trainingPlans}
@@ -168,7 +156,9 @@ function App() {
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/logout" element={<Logout />} />
+                    <Route element={<RoutGuard />}>
+                        <Route path="/logout" element={<Logout />} />
+                    </Route>
                 </Routes>
                 <Footer />
 
