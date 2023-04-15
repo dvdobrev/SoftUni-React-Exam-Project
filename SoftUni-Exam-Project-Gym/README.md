@@ -11,6 +11,7 @@ The users of the app can:
 -	Logged in users can share/post their own training plan. They can edit and delete only their own plans. But they can comment the plans of the others.
 -	Guest users can only see the plans of the other users as well details for each plan. But they can NOT edit, delete or comment any plan.
 -	Any user can send a message using the form in the contact link. After sending the message - the owner of the fitness will automatically receive an email from the sender including his data and his message. 
+-   If user is not logged in, and try to go to notallowed page like /myPlans, /createPlan, /logout, he will be redericted to the login page.
 
 # Technologies used in the project:
 -	React 18.2.0
@@ -20,7 +21,7 @@ The users of the app can:
 -	Emailjs-com 3.2.0
 
 # Used server for the project is:
-**Softuni practice server** ( https://github.com/softuni-practice-server/softuni-practice-server#collections ) 
+**SoftUni practice server** ( https://github.com/softuni-practice-server/softuni-practice-server#collections ) 
 -	**NOTE:** CRUD operations for the collections use other links than those described in the server documentation:
     -	http://localhost:3030/data/plans
     -   http://localhost:3030/data/comments
