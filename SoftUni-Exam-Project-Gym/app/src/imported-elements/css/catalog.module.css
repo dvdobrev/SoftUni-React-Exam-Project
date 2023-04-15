@@ -24,8 +24,7 @@ section {
 #catalog-page h1 {
     color: white;
     text-align: center;
-    margin-top: 28px;
-    margin-bottom: 28px;
+    padding-top: 100px;
 }
 
 .card {

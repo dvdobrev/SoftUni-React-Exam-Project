@@ -1,4 +1,4 @@
-.createPlaneSection {
+.createPlanSection {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,7 +7,8 @@
     background-image: url(../images/createPlan.jpg);
 }
 
-.createPlaneSection h1 {
+.createPlanSection h1 {
+    padding-top: 100px;
     color: white;
 }
 
@@ -40,13 +41,6 @@
     box-sizing: border-box;
 }
 
-.createPlan label select:focus,
-.createPlan label input[type='text']:focus,
-.createPlan label textarea:focus {
-    outline: none;
-    border-color: #4285f4;
-}
-
 .createPlan label select {
     height: 40px;
 }
@@ -55,21 +49,7 @@
     min-height: 100px;
 }
 
-.submitBtn {
-    background-color: #4285f4;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.submitBtn:hover {
-    background-color: #ed563b;
-}
-
-.submit-container {
+.submit-div {
     display: flex;
     align-content: stretch;
     justify-content: center;
