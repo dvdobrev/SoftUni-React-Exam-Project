@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     position: relative;
+    padding-top: 100px;
 }
 
 .plan-details-title {
@@ -123,19 +124,32 @@
     width: 80%;
     max-width: 500px;
 }
-
-.create-comment input[type="text"],
-.create-comment textarea {
+.comment-div,
+.comment-div input[type="text"],
+.comment-div textarea {
     padding: 10px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 5px;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
 }
 
+.comment-div input[type="text"] {
+    border: 1px solid #ccc;
+
+}
+
 .addButton {
     margin-bottom: 14px;
+}
+
+.submit-div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
 /* ------------Confirm Message CSS---------------- */
