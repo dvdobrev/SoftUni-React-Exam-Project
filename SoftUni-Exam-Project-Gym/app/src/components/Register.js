@@ -20,7 +20,6 @@ export const Register = () => {
         emailErrorMessage: '',
         passwordErrorMessage: '',
         matchPasswordErrorMessage: '',
-        comment: '',
     });
 
 
