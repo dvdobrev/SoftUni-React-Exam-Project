@@ -26,6 +26,7 @@ export const PlanDetails = (
     const [error, setError] = useState({
         username: '',
         comment: '',
+        emptyFiled: '',
     });
 
     useEffect(() => {
@@ -51,8 +52,35 @@ export const PlanDetails = (
 
     }, [planId, navigate]);
 
+
     const addCommentHandler = (e) => {
         e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const username = formData.get('username');
+        const comment = formData.get('comment');
+
+        const errors = validateFormData({ username, comment });
+        let errorMessage;
+
+        if (Object.values(errors).some((message) => message !== '')) {
+            console.log('has errors');
+            errorMessage = "Please enter a username and comment"
+
+            setError(state => ({
+                ...state,
+                emptyFiled: errorMessage
+            }));
+            return;
+        } else {
+            setError(state => ({
+                ...state,
+                emptyFiled: ""
+            }));
+        }
+
+
 
         planServices
             .createComment({ planId, username, comment })
@@ -60,34 +88,63 @@ export const PlanDetails = (
                 setAllComments((prevComments) => [...prevComments, newComment]);
                 setUsername('');
                 setComment('');
-            }).catch((error) => {
-                navigate(`/pageNotFound`)
+            })
+            .catch((error) => {
+                navigate(`/pageNotFound`);
             });
     };
 
+    const validateFormData = ({ username, comment }) => {
+        const errors = {};
+
+        if (!username || username.length < 2 || username.length > 10) {
+            errors.username = 'Username must be between 4 and 10 characters';
+        }
+
+        if (!comment || comment.length < 2 || comment.length > 20) {
+            errors.comment = 'The comment must be between than 2 and 20 characters';
+        }
+
+        return errors;
+    };
+
     const onChangeUsername = (e) => {
-        setUsername(e.target.value);
-        validateUsername(e.target.value);
+        const username = e.target.value;
+        validateUsername(username);
+        setUsername(username);
     };
 
     const onChangeComment = (e) => {
-        setComment(e.target.value);
+        const comment = e.target.value;
+        validateComment(comment);
+        setComment(comment);
+    };
+
+    const validateComment = (comment) => {
+        let errorMessage;
+
+        if (!comment || comment.length < 2 || comment.length > 20) {
+            errorMessage = 'The comment must be between than 2 and 20 characters';
+        }
+
+        setError((state) => ({
+            ...state,
+            comment: errorMessage,
+        }));
     };
 
     const validateUsername = (username) => {
-        let errorMessage = '';
+        let errorMessage;
 
-        if (username.length < 2) {
-            errorMessage = 'Username must be longer than 4 characters';
-        } else if (username.length > 10) {
-            errorMessage = 'Username must be shorter than 10 characters';
+        if (!username || username.length < 2 || username.length > 10) {
+            errorMessage = 'Username must be between 4 and 10 characters';
         }
 
-        setError(state => ({
+        setError((state) => ({
             ...state,
             username: errorMessage,
         }));
-    }
+    };
 
     const confirmDeleteHandler = () => {
         setShowConfirm(true);
@@ -110,10 +167,6 @@ export const PlanDetails = (
 
     return (
         <section className={`${detailsCSS["details-section"]}`}>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
 
             <h1 className={detailsCSS["plan-details-title"]}>Plan Details</h1>
             <div className={`${detailsCSS["plan-details-container"]}`}>
@@ -175,26 +228,38 @@ export const PlanDetails = (
                 <article className={detailsCSS["create-comment"]}>
                     <label>Add new comment:</label>
                     <form className={detailsCSS["form"]} onSubmit={addCommentHandler}>
-                        <input
-                            type="text"
-                            name="username"
-                            placeholder="Enter your username"
-                            value={username}
-                            onChange={onChangeUsername}
-                        />
+                        <div className={detailsCSS["comment-div"]}>
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="Enter your username"
+                                value={username}
+                                onChange={onChangeUsername}
+                            />
 
-                        <textarea
-                            name="comment"
-                            placeholder="Comment......"
-                            value={comment}
-                            onChange={onChangeComment}
-                        />
+                            {error.username && <div style={{ color: 'red' }}>{error.username}</div>}
+                        </div>
 
-                        <input
-                            className={`${styles["buttons"]} ${detailsCSS["addButton"]}`}
-                            type="submit"
-                            value="Add Comment"
-                        />
+                        <div className={detailsCSS["comment-div"]}>
+                            <textarea
+                                name="comment"
+                                placeholder="Comment......"
+                                value={comment}
+                                onChange={onChangeComment}
+                            />
+
+                            {error.comment && <div style={{ color: 'red' }}>{error.comment}</div>}
+                        </div>
+
+                        <div className={detailsCSS["submit-div"]}>
+                            <input
+                                className={`${styles["buttons"]} ${detailsCSS["addButton"]}`}
+                                type="submit"
+                                value="Add Comment"
+                            />
+
+                            {error.emptyFiled && <div style={{ color: 'red' }}>{error.emptyFiled}</div>}
+                        </div>
                     </form>
                 </article>
             }
