@@ -30,9 +30,6 @@ export const Login = () => {
             .catch(() => {
                 navigate('/PageNotFound');
             });
-
-        console.log(email);
-        console.log(password);
     };
 
     return (

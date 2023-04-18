@@ -65,7 +65,6 @@ export const PlanDetails = (
         let errorMessage;
 
         if (Object.values(errors).some((message) => message !== '')) {
-            console.log('has errors');
             errorMessage = "Please enter a username and comment"
 
             setError(state => ({
@@ -79,8 +78,6 @@ export const PlanDetails = (
                 emptyFiled: ""
             }));
         }
-
-
 
         planServices
             .createComment({ planId, username, comment })
@@ -160,7 +157,6 @@ export const PlanDetails = (
                 fetchallPlans();
                 fetchUserPlans(ownerId);
                 setShowConfirm(false);
-                planServices.deleteAllComments(planId);
                 navigate(`/myPlans`);
             });
     };

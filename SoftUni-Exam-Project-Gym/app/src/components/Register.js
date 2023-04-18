@@ -8,7 +8,6 @@ import styles from '../imported-elements/css/global-stayles.module.css'
 import loginRegisterCSS from "../imported-elements/css/loginRegisterCSS.module.css";
 
 
-//TODO: Remove unnecessary code
 export const Register = () => {
 
     const { userDataHandler } = useContext(UserContext);
@@ -45,11 +44,6 @@ export const Register = () => {
         const firstName = formData.get('firstName');
         const lastName = formData.get('lastName');
 
-        console.log(email);
-        console.log(password);
-        console.log(email);
-        console.log(firstName);
-        console.log(lastName);
 
         if (password !== repeatPassword) {
             return;
@@ -109,9 +103,6 @@ export const Register = () => {
             emailErrorMessage: message,
         }));
     };
-
-
-    //TODO: Search and delete the console.log in whole project -> crl + shft + H
 
     const passwordValidation = (e) => {
         const password = e.target.value;

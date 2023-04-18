@@ -10,14 +10,7 @@ export const PlansCatalog = () => {
     const {trainingPlans} = useContext(PlanContext);
     const {userPlans} = useContext(PlanContext);
 
-    console.log(userPlans);
-    console.log(trainingPlans);
-
     return (
-        //TODO: Delete the comments from database after delete a plan
-        //TODO: make client side rendering for the comments
-        //TODO: delete the comments from training plan services
-
 
         <section id={`${catalogCSS["catalog-page"]}`}>
 

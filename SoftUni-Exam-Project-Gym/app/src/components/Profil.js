@@ -13,8 +13,6 @@ export const Profil = () => {
     const { userData } = useContext(UserContext);
     const navigate = useNavigate();
 
-    console.log(userData);
-
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -25,8 +23,6 @@ export const Profil = () => {
                 navigate(`/profil`)
             });
     };
-
-    console.log(userData.firstName);
 
     return (
         <section>
@@ -58,7 +54,7 @@ export const Profil = () => {
                         <input
                             type="text"
                             name="city"
-                            defaultValue={userData.city}
+                            defaultValue={userData.email}
                         />
                     </label>
 

@@ -41,7 +41,6 @@ export const PlanProvider = ({
     const fetchallPlans = () => {
         traingPlanService.getAll()
             .then(result => {
-                console.log(result);
                 setTrainingPlans(result);
             });
     }

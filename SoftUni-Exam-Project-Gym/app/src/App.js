@@ -1,11 +1,7 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { Routes, Route } from 'react-router-dom';
 
-import { UserContext, UserProvider } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext';
 
-import * as traingPlanService from './services/trainingPlanService';
-
-// import { useLocalStorage } from './hooks/useLocalStorage';
 
 import { Header } from './components/Header';
 import { MainBanner } from './components/MainBanner';
@@ -16,7 +12,7 @@ import { Classes } from "./components/Classes";
 // import { Programs } from "./components/Programs";
 import { PlansCatalog } from './components/Plans/PlansCatalog';
 import { PageNotFound } from './components/PageNotFound';
-import { Profil } from './components/Profil';
+// import { Profil } from './components/Profil';
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
 import { Logout } from './components/Logout';
