@@ -5,11 +5,11 @@ The users of the app can:
 -	Register
 -	Log in
 -	Log out
--	See information about the fitness studio
--	See training plans of other customers
+-	View information about the fitness studio
+-	View training plans of other customers
 
 -	Logged in users can share/post their own training plan. They can edit and delete only their own plans. But they can comment the plans of the others.
--	Guest users can only see the plans of the other users as well details for each plan. But they can NOT edit, delete or comment any plan.
+-	Guest users can only view the plans of the other users as well details for each plan. But they can NOT edit, delete or comment any plan.
 -	Any user can send a message using the form in the contact link. After sending the message - the owner of the fitness will automatically receive an email from the sender including his data and his message. 
 -   If user is not logged in, and try to go to page like /myPlans, /createPlan, /logout, he will be redericted to the login page.
 
