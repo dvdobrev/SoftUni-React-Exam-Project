@@ -27,6 +27,7 @@ The users of the app can:
     -   http://localhost:3030/data/comments
 
 # How to start it?
+-	Start terminal and install react (if not installed) from the client folder do ***install react***
 -	Start terminal from the client folder do ***npm start***
 -	Start terminal from the server folder do ***node server.js***
 
