@@ -28,9 +28,11 @@ The users of the app can:
 
 # How to start it?
 -	Start terminal and install ***react*** (if not installed) from the client folder do ***install react***
+-	Start terminal and install ***react-router-dom*** (if not installed) from the client folder do ***react-router-dom***
+-	Start terminal and install ***emailjs-com*** (if not installed) from the client folder do ***emailjs-com***
 -	Start terminal from the client folder do ***npm start***
 -	Start terminal from the server folder do ***node server.js***
 
 
 # Deployment
-You can try out the app on https://project-gym-24441.firebaseapp.com/
+You can try out the app on https://project-gym-69f1f.firebaseapp.com
