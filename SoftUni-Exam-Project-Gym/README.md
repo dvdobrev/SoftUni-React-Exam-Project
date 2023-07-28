@@ -35,4 +35,4 @@ The users of the app can:
 
 
 # Deployment
-You can try out the app on https://project-gym-69f1f.firebaseapp.com
+You can try out the app on https://project-gym-dobrin-dobrev.web.app/
