@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { UserProvider } from './contexts/UserContext';
 
@@ -28,6 +29,12 @@ import { PlanProvider } from './contexts/PlanContext';
 
 
 function App() {
+
+    useEffect(() => {
+        // Clear local storage on component mount
+        localStorage.clear();
+    }, []);
+
 
     return (
 
