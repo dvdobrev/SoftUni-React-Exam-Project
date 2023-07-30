@@ -4,11 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import * as userServices from "../services/userServices";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+
+
 import styles from '../imported-elements/css/global-stayles.module.css'
 import loginRegisterCSS from "../imported-elements/css/loginRegisterCSS.module.css";
 
 
 export const Register = () => {
+
+    console.log("Firebase API key from .env:", process.env.REACT_APP_FIREBASE_KEY);
+
 
     const { userDataHandler } = useContext(UserContext);
     const navigate = useNavigate();
@@ -21,44 +28,62 @@ export const Register = () => {
         matchPasswordErrorMessage: '',
     });
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [password, setPassword] = useState({
-        password: '',
-        repeatPassowrd: ''
-    });
+    console.log("Email: " + email);
+    console.log("Password: " + password);
+
+    // const [password, setPassword] = useState({
+    //     password: '',
+    //     repeatPassowrd: ''
+    // });
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         const hasErrors = Object.values(error).some((message) => message !== '');
 
-        if(hasErrors) {
+        if (hasErrors) {
             return;
         }
 
-        const formData = new FormData(e.target);
+        // const formData = new FormData(e.target);
 
-        const email = formData.get('email');
-        const password = formData.get('password');
-        const repeatPassword = formData.get('repeatPassword');
-        const firstName = formData.get('firstName');
-        const lastName = formData.get('lastName');
+        // const email = formData.get('email');
+        // const password = formData.get('password');
+        // const repeatPassword = formData.get('repeatPassword');
+        // const firstName = formData.get('firstName');
+        // const lastName = formData.get('lastName');
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("User: " + user);
+
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
 
 
-        if (password !== repeatPassword) {
-            return;
-        }
+        // if (password !== repeatPassword) {
+        //     return;
+        // }
 
-        userServices.register(email, password, firstName, lastName)
-        .then(userData => {
-            userDataHandler(userData);
-            return userServices.saveUserData(firstName, lastName);
-        })
-        .then(() => {
-            navigate('/');
-        }).catch((error) => {
-            navigate(`/pageNotFound`)
-        });   
+        // userServices.register(email, password, firstName, lastName)
+        // .then(userData => {
+        //     userDataHandler(userData);
+        //     return userServices.saveUserData(firstName, lastName);
+        // })
+        // .then(() => {
+        //     navigate('/');
+        // }).catch((error) => {
+        //     navigate(`/pageNotFound`)
+        // });   
     }
 
     const firstnameValidation = (e) => {
@@ -104,51 +129,51 @@ export const Register = () => {
         }));
     };
 
-    const passwordValidation = (e) => {
-        const password = e.target.value;
-        let errorMessage = '';
+    // const passwordValidation = (e) => {
+    //     const password = e.target.value;
+    //     let errorMessage = '';
 
-        if (password.length < 6 || password.length > 20) {
-            errorMessage = 'The passowrd must be between 6 and 20 characters'
-        }
+    //     if (password.length < 6 || password.length > 20) {
+    //         errorMessage = 'The passowrd must be between 6 and 20 characters'
+    //     }
 
-        setError(state => ({
-            ...state,
-            passwordErrorMessage: errorMessage,
-        }));
+    //     setError(state => ({
+    //         ...state,
+    //         passwordErrorMessage: errorMessage,
+    //     }));
 
-        setPassword(state => ({
-            ...state,
-            password: password
-        }))
-    }
+    //     // setPassword(state => ({
+    //     //     ...state,
+    //     //     password: password
+    //     // }))
+    // }
 
-    const repeatPasswordValidation = (e) => {
-        const repeatPassword = e.target.value;
-        let errorMessage = '';
+    // const repeatPasswordValidation = (e) => {
+    //     const repeatPassword = e.target.value;
+    //     let errorMessage = '';
 
-        setPassword(state => ({
-            ...state,
-            repeatPassowrd: repeatPassword
-        }));
+    //     // setPassword(state => ({
+    //     //     ...state,
+    //     //     repeatPassowrd: repeatPassword
+    //     // }));
 
-        if (password.password === '') {
-            setPassword(state => ({
-                ...state,
-                password: '',
-            }));
-        }
+    //     if (password.password === '') {
+    //         setPassword(state => ({
+    //             ...state,
+    //             password: '',
+    //         }));
+    //     }
 
 
-        if (password.password !== repeatPassword) {
-            errorMessage = 'Passwords don\'t macht';
-        }
+    //     if (password.password !== repeatPassword) {
+    //         errorMessage = 'Passwords don\'t macht';
+    //     }
 
-        setError(state => ({
-            ...state,
-            matchPasswordErrorMessage: errorMessage,
-        }));
-    }
+    //     setError(state => ({
+    //         ...state,
+    //         matchPasswordErrorMessage: errorMessage,
+    //     }));
+    // }
 
 
     return (
@@ -199,6 +224,7 @@ export const Register = () => {
                             size={30}
                             placeholder="Email"
                             onBlur={emailValidation}
+                            onChange={e => setEmail(e.target.value)}
                         />
 
                         {error.emailErrorMessage &&
@@ -214,7 +240,9 @@ export const Register = () => {
                             name="password"
                             size={30}
                             placeholder="Password"
-                            onBlur={passwordValidation}
+                            // onBlur={passwordValidation}
+                            onChange={e => setPassword(e.target.value)}
+
                         />
 
                         {error.passwordErrorMessage &&
@@ -230,7 +258,7 @@ export const Register = () => {
                             name="repeatPassword"
                             size={30}
                             placeholder="Repeat Password"
-                            onBlur={repeatPasswordValidation}
+                            // onBlur={repeatPasswordValidation}
                         />
                         {error.matchPasswordErrorMessage &&
                             <div style={{ color: 'white' }}>{error.matchPasswordErrorMessage}</div>
@@ -238,7 +266,11 @@ export const Register = () => {
                     </div>
                 </div>
 
-                <button className={`${styles["buttons"]} ${loginRegisterCSS["button"]}`} type="text" name="firstName"> Sign up </button>
+                <button
+                    className={`${styles["buttons"]} ${loginRegisterCSS["button"]}`}
+                    type="submit"
+                > Sign up
+                </button>
             </form>
         </div>
     );
