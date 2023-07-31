@@ -20,7 +20,7 @@ export const CallToAction = () => {
                         <div className={callToActionCSS["cta-content"]}>
                             <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
                             <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula, sit amet dapibus odio augue eget libero. Morbi tempus mauris a nisi luctus imperdiet.</p>
-                            {!userData.email &&
+                            {!userData?.email &&
                                 <div>
                                     <NavLink className={styles["buttons"]} to="/register">Become a member</NavLink>
                                 </div>

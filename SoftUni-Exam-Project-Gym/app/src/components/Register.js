@@ -14,9 +14,6 @@ import loginRegisterCSS from "../imported-elements/css/loginRegisterCSS.module.c
 
 export const Register = () => {
 
-    console.log("Firebase API key from .env:", process.env.REACT_APP_FIREBASE_KEY);
-
-
     const { userDataHandler } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -61,6 +58,7 @@ export const Register = () => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log("User: " + user);
+                navigate("/");
 
             })
             .catch((error) => {

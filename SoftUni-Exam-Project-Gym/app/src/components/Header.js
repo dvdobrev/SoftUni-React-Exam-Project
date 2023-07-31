@@ -14,6 +14,13 @@ export const Header = () => {
 
     const { userData } = useContext(UserContext)
 
+    if (userData == undefined) {
+        console.log("No user data");
+    } else {
+        console.log(userData.user);
+    }
+
+
     return (
 
         <header className={`${headerCSS["header-area"]} ${headerCSS["header-sticky"]}`}>
@@ -28,7 +35,7 @@ export const Header = () => {
                             <NavLink className={headerCSS["logo"]} to="/">Training<em> Studio</em></NavLink>
                             <ul className={`${headerCSS["nav"]} ${headerCSS["header-guest"]}`}>
 
-                                {userData.email && <span id={headerCSS["welcomeSpan"]} >Hello {userData.email}</span>}
+                                {userData?.email && <span id={headerCSS["welcomeSpan"]} >Hello {userData.email}</span>}
 
                                 <li><NavLink className={headerCSS["scroll-to-section"]} to="/">Home</NavLink></li>
                                 {/* <li><NavLink className={headerCSS["scroll-to-section"]} to="/programs">Programs/Courses</NavLink></li> */}
@@ -38,7 +45,7 @@ export const Header = () => {
                                 {/* <li><NavLink className={headerCSS["scroll-to-section"]} to="schedules">Schedules</NavLink></li> */}
                                 <li> <NavLink className={headerCSS["main-button"]} to="/plansCatalog">Training Plans</NavLink></li>
 
-                                {userData.email &&
+                                {userData?.user &&
                                     <>
                                         <li> <NavLink className={headerCSS["main-button"]} to="/myPlans">My Plans</NavLink></li>
                                         <li> <NavLink className={headerCSS["main-button"]} to="/createPlan">Creat Plan</NavLink></li>
@@ -47,7 +54,7 @@ export const Header = () => {
 
                                 <li> <NavLink className={headerCSS["scroll-to-section"]} to="/contact">Contact</NavLink></li>
 
-                                {userData.email
+                                {userData?.email
                                     ? <div className={headerCSS["header-user"]}>
                                         {/* <li> <NavLink className={headerCSS["main-button"]} to="/profil">Profil</NavLink></li> */}
                                         <li> <NavLink className={styles["buttons"]} to="/logout">Logout</NavLink></li>

@@ -6,18 +6,22 @@ import * as userServices from '../services/userServices';
 
 export const Logout = () => {
     const navigate = useNavigate();
-    const {userData, logoutHandler} = useContext(UserContext);
+    const { userData, logoutHandler } = useContext(UserContext);
 
 
     useEffect(() => {
-        userServices.logout(userData.accessToken)
-            .then(() => {
-                logoutHandler();
-                navigate('/');
-            })
-            .catch(() => {
-                navigate('/');
-            });
+        logoutHandler()
+        // localStorage.clear()
+        navigate('/')
+            // userServices.logout(userData.accessToken)
+            //     .then(() => {
+            //         logoutHandler();
+            //         localStorage.clear();
+            //         navigate('/');
+            //     })
+            // .catch(() => {
+            //     navigate('/');
+            // });
     });
 
     return null;

@@ -22,7 +22,7 @@ export const MainBanner = () => {
                 <div className={mainBannerCSS["caption"]}>
                     <h6>work harder, get stronger</h6>
                     <h2>easy with our <em>gym</em></h2>
-                    {!userData.email &&
+                    {!userData?.email &&
                         <div>
                             <NavLink className={styles["buttons"]} to="/register">Become a member</NavLink>
                         </div>

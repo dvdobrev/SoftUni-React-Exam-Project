@@ -27,13 +27,19 @@ import { Footer } from './components/Footer';
 import { RoutGuard } from './routGuards/RoutGuard';
 import { PlanProvider } from './contexts/PlanContext';
 
+import { useLocalStorage } from './hooks/useLocalStorage';
+
+
 
 function App() {
 
-    useEffect(() => {
-        // Clear local storage on component mount
-        localStorage.clear();
-    }, []);
+    // useEffect(() => {
+    //     // Clear local storage on component mount
+    //     localStorage.clear();
+    // }, []);
+
+    const [userData, setUserData] = useLocalStorage('userData', {});
+
 
 
     return (
