@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+
 
 
 
@@ -7,6 +10,9 @@ import { getAuth } from "firebase/auth";
 // with error thast why i use the key directly
 
 //TODO: delete the all console.log, especially in the register form
+
+//TODO: delete all comments and unnecessary code
+
 
 // web app's Firebase configuration
 const firebaseConfig = {
@@ -21,3 +27,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
+
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
+

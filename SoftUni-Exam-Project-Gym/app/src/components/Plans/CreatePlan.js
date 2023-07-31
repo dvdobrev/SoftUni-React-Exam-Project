@@ -5,7 +5,15 @@ import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
+import { doc, setDoc } from "firebase/firestore";
+import { db } from '../../firebase';
+import { UserContext } from '../../contexts/UserContext';
+
+
 export const CreatePlan = () => {
+
+    const { userData } = useContext(UserContext)
+    const ownerId = userData.uid;
 
     const navigate = useNavigate();
 
@@ -16,8 +24,9 @@ export const CreatePlan = () => {
 
     const { addPlan, addUserPlan } = useContext(PlanContext);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
+        const planData = Object.fromEntries(new FormData(e.target));
 
         const hasErrors = Object.values(error).some((message) => message !== '');
 
@@ -25,15 +34,21 @@ export const CreatePlan = () => {
             return;
         }
 
-        const planData = Object.fromEntries(new FormData(e.target));
-
-        planServices.create(planData).then((result) => {
-            addPlan(result);
-            addUserPlan(result);
-            navigate('/plansCatalog');
-        }).catch((error) => {
-            navigate(`/pageNotFound`)
+        await setDoc(doc(db, "Plans", ownerId), {
+            level: planData.level,
+            dayPerWeek: planData.days,
+            description: planData.description
         });
+
+
+
+        // planServices.create(planData).then((result) => {
+        //     addPlan(result);
+        //     addUserPlan(result);
+        //     navigate('/plansCatalog');
+        // }).catch((error) => {
+        //     navigate(`/pageNotFound`)
+        // });
     };
 
     const isDigitValidation = (e) => {
