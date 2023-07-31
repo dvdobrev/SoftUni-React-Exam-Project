@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as userServices from "../services/userServices";
 
-import { signInWithEmailAndPassword  } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 
@@ -18,6 +18,7 @@ export const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState(false);
 
     const { userDataHandler } = useContext(UserContext);
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const Login = () => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        signInWithEmailAndPassword (auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
@@ -35,11 +36,10 @@ export const Login = () => {
 
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-            });
+                setLoginError(true);
 
+            });
+        console.log("Login Error: " + loginError);
 
 
         // const {
@@ -87,6 +87,10 @@ export const Login = () => {
                         />
                     </div>
                 </div>
+
+                {loginError &&
+                    <span>Wrong Email or Password!!</span>
+                }
 
                 <button className={styles["buttons"]} type="text">Log In </button>
             </form>
