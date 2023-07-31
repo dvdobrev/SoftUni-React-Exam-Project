@@ -4,12 +4,13 @@ import { UserContext } from "../contexts/UserContext";
 import { Navigate, Outlet } from "react-router-dom";
 
 
-export const RoutGuard = () => {
+export const LoginGuard = () => {
 
     const { userData } = useContext(UserContext);
+    console.log("From Guard: ");
 
-    if (!userData.email) {
-        return <Navigate to="/login" replace />
+    if (Object.keys(userData).length > 0) {
+        return <Navigate to="/" replace />
     }
 
     return <Outlet />

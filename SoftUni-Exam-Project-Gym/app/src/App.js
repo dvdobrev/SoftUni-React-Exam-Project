@@ -25,6 +25,8 @@ import { PlanDetails } from './components/Plans/PlanDetails';
 
 import { Footer } from './components/Footer';
 import { RoutGuard } from './routGuards/RoutGuard';
+import { LoginGuard } from './routGuards/LoginGuard';
+
 import { PlanProvider } from './contexts/PlanContext';
 
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -77,7 +79,7 @@ function App() {
 
                         <Route path="/plans/:planId/details" element={<PlanDetails />} />
 
-                        <Route element={<RoutGuard />}>
+                        <Route element={<LoginGuard />}>
 
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
