@@ -11,6 +11,12 @@ export const RoutGuard = () => {
     if (!userData.email) {
         return <Navigate to="/login" replace />
     }
+
+    if (userData) {
+        return <Navigate to="/" replace />
+    }
+
+
     return <Outlet />
 
 };

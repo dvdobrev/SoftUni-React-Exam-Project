@@ -77,10 +77,11 @@ function App() {
 
                         <Route path="/plans/:planId/details" element={<PlanDetails />} />
 
+                        <Route element={<RoutGuard />}>
 
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                        </Route>
                         <Route element={<RoutGuard />}>
                             <Route path="/logout" element={<Logout />} />
                         </Route>
