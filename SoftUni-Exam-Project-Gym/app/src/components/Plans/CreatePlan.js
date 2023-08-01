@@ -5,15 +5,18 @@ import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { UserContext } from '../../contexts/UserContext';
+import { RandomStringGenerator } from '../../helpers/RandomId';
 
 
 export const CreatePlan = () => {
 
     const { userData } = useContext(UserContext)
     const ownerId = userData.uid;
+
+    let planId = RandomStringGenerator();
 
     const navigate = useNavigate();
 
@@ -34,11 +37,17 @@ export const CreatePlan = () => {
             return;
         }
 
-        await setDoc(doc(db, "Plans", ownerId), {
+        await addDoc(collection(db, "Plans"), {
+            ownerId: ownerId,
             level: planData.level,
-            dayPerWeek: planData.days,
-            description: planData.description
+            days: planData.days,
+            description: planData.description,
+            planId: planId,
+            timeStamp: serverTimestamp(),
         });
+
+
+        // navigate('/');
 
 
 
@@ -49,6 +58,7 @@ export const CreatePlan = () => {
         // }).catch((error) => {
         //     navigate(`/pageNotFound`)
         // });
+
     };
 
     const isDigitValidation = (e) => {
