@@ -13,6 +13,10 @@ import { getFirestore } from "firebase/firestore";
 
 //TODO: delete all comments and unnecessary code
 
+//TODO: add logik after register the user to be directly logged in
+
+//TODO: fix why added plans are not shown
+
 
 // web app's Firebase configuration
 const firebaseConfig = {
@@ -27,7 +31,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
-
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);

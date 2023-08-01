@@ -5,7 +5,7 @@ import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
-import { addDoc, collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { UserContext } from '../../contexts/UserContext';
 import { RandomStringGenerator } from '../../helpers/RandomId';
@@ -37,7 +37,7 @@ export const CreatePlan = () => {
             return;
         }
 
-        await addDoc(collection(db, "Plans"), {
+        const planObject = await addDoc(collection(db, "Plans"), {
             ownerId: ownerId,
             level: planData.level,
             days: planData.days,
@@ -47,17 +47,13 @@ export const CreatePlan = () => {
         });
 
 
-        // navigate('/');
+        const planDoc = await getDoc(planObject);
+        const planInfo = planDoc.data();
 
+        addPlan(planInfo);
+        addUserPlan(planInfo);
 
-
-        // planServices.create(planData).then((result) => {
-        //     addPlan(result);
-        //     addUserPlan(result);
-        //     navigate('/plansCatalog');
-        // }).catch((error) => {
-        //     navigate(`/pageNotFound`)
-        // });
+        navigate('/plansCatalog');
 
     };
 
