@@ -19,7 +19,7 @@ export const PlanDetails = (
 
     const navigate = useNavigate();
 
-    const { ownerId, fetchallPlans, fetchUserPlans } = useContext(PlanContext);
+    const { ownerId, fetchAllPlans, fetchUserPlans } = useContext(PlanContext);
     const planOwnerId = currentPlan.ownerId;
 
     const [username, setUsername] = useState('');
@@ -188,7 +188,9 @@ export const PlanDetails = (
 
     //TODO: get the document id to delete it
     const deletePlanHandler = async () => {
-        await deleteDoc(doc(db, "Plans", "Document ID"));
+        await deleteDoc(doc(db, "Plans",  dokumentId));
+        fetchAllPlans()
+        fetchUserPlans()
         navigate(`/myPlans`);
 
     };

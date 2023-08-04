@@ -25,17 +25,6 @@ export const PlanProvider = ({
 
     useEffect(() => {
         if (ownerId) {
-            // Fetch user plans if ownerId is available
-            const fetchUserPlans = async () => {
-                try {
-                    const q = query(collection(db, "Plans"), where("ownerId", "==", ownerId));
-                    const querySnapshot = await getDocs(q);
-                    const userList = querySnapshot.docs.map((doc) => doc.data());
-                    setUserPlans(userList);
-                } catch (error) {
-                    console.error("Error fetching user plans:", error);
-                }
-            };
 
             fetchUserPlans();
         } else {
@@ -45,21 +34,34 @@ export const PlanProvider = ({
     }, [ownerId]);
 
     useEffect(() => {
-        const fetchAllPlans = async () => {
-
-            let list = [];
-
-            const q = query(collection(db, "Plans"));
-            const querySnapshot = await getDocs(q);
-
-            querySnapshot.forEach((doc) => {
-                list.push(doc.data());
-            });
-            setTrainingPlans(list);
-        };
 
         fetchAllPlans();
     }, [trainingPlans]);
+
+    const fetchAllPlans = async () => {
+
+        let list = [];
+
+        const q = query(collection(db, "Plans"));
+        const querySnapshot = await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        setTrainingPlans(list);
+    };
+
+    // Fetch user plans if ownerId is available
+    const fetchUserPlans = async () => {
+        try {
+            const q = query(collection(db, "Plans"), where("ownerId", "==", ownerId));
+            const querySnapshot = await getDocs(q);
+            const userList = querySnapshot.docs.map((doc) => doc.data());
+            setUserPlans(userList);
+        } catch (error) {
+            console.error("Error fetching user plans:", error);
+        }
+    };
 
 
 
@@ -88,6 +90,8 @@ export const PlanProvider = ({
             ownerId,
             trainingPlans,
             userPlans,
+            fetchAllPlans,
+            fetchUserPlans,
             addPlan,
             addUserPlan,
             // editPlan
