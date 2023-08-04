@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 
 
 
-
+//TODO: solve the problem with no sorting the plans as a stack - it is because of their saving row in firebase
 
 //TODO: make the apiKey in .env - now it comes
 // with error thast why i use the key directly
@@ -16,6 +16,7 @@ import { getFirestore } from "firebase/firestore";
 //TODO: add logik after register the user to be directly logged in
 
 //TODO: fix why added plans are not shown
+
 
 
 // web app's Firebase configuration

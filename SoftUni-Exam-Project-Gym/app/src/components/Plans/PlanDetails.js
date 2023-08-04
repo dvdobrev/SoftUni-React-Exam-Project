@@ -5,6 +5,8 @@ import { PlanContext } from "../../contexts/PlanContext";
 import * as planServices from '../../services/trainingPlanService';
 import detailsCSS from '../../imported-elements/css/details.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
+import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 
 export const PlanDetails = (
@@ -13,11 +15,12 @@ export const PlanDetails = (
     const [showConfirm, setShowConfirm] = useState(false);
     const { planId } = useParams();
     const [currentPlan, setCurrentPlan] = useState({});
+    const [dokumentId, setDokumentId] = useState("");
 
     const navigate = useNavigate();
 
     const { ownerId, fetchallPlans, fetchUserPlans } = useContext(PlanContext);
-    const planOwnerId = currentPlan._ownerId;
+    const planOwnerId = currentPlan.ownerId;
 
     const [username, setUsername] = useState('');
     const [comment, setComment] = useState('');
@@ -29,26 +32,48 @@ export const PlanDetails = (
         emptyFiled: '',
     });
 
-    useEffect(() => {
-        planServices.getAllComments()
-            .then(plans => plans.filter(plan => plan.planId === planId))
-            .then(filteredComments => {
-                setAllComments(filteredComments);
-            })
-            .catch((error) => {
-                navigate("/PageNotFound");
-            });
-    }, [planId, navigate]);
+    // useEffect(() => {
+    //     planServices.getAllComments()
+    //         .then(plans => plans.filter(plan => plan.planId === planId))
+    //         .then(filteredComments => {
+    //             setAllComments(filteredComments);
+    //         })
+    //         .catch((error) => {
+    //             navigate("/PageNotFound");
+    //         });
+    // }, [planId, navigate]);
+
+
+    // useEffect(() => {
+    //     planServices.getOne(planId)
+    //         .then(result => {
+    //             setCurrentPlan(result)
+    //         })
+    //         .catch((error) => {
+    //             navigate(`/pageNotFound`)
+    //         });
+
+    // }, [planId, navigate]);
 
 
     useEffect(() => {
-        planServices.getOne(planId)
-            .then(result => {
-                setCurrentPlan(result)
-            })
-            .catch((error) => {
-                navigate(`/pageNotFound`)
-            });
+
+        const getPlan = async () => {
+            console.log("planId: " + planId);
+
+            try {
+                const q = query(collection(db, "Plans"), where("planId", "==", planId));
+                const querySnapshot = await getDocs(q);
+                const searchedPlan = querySnapshot.docs.map((doc) => doc.data())[0];
+                const dokId = querySnapshot.docs[0].id;
+                setCurrentPlan(searchedPlan);
+                setDokumentId(dokId);
+            } catch (error) {
+                console.error("Error fetching user plans:", error);
+            }
+        };
+
+        getPlan();
 
     }, [planId, navigate]);
 
@@ -151,14 +176,21 @@ export const PlanDetails = (
         setShowConfirm(false);
     };
 
-    const deletePlanHandler = () => {
-        planServices.deleteOne(planId)
-            .then(() => {
-                fetchallPlans();
-                fetchUserPlans(ownerId);
-                setShowConfirm(false);
-                navigate(`/myPlans`);
-            });
+    // const deletePlanHandler = () => {
+    //     planServices.deleteOne(planId)
+    //         .then(() => {
+    //             fetchallPlans();
+    //             fetchUserPlans(ownerId);
+    //             setShowConfirm(false);
+    //             navigate(`/myPlans`);
+    //         });
+    // };
+
+    //TODO: get the document id to delete it
+    const deletePlanHandler = async () => {
+        await deleteDoc(doc(db, "Plans", "Document ID"));
+        navigate(`/myPlans`);
+
     };
 
     return (

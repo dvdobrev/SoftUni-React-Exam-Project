@@ -24,7 +24,6 @@ export const PlanProvider = ({
 
 
     useEffect(() => {
-        console.log("Owner id: " + ownerId);
         if (ownerId) {
             // Fetch user plans if ownerId is available
             const fetchUserPlans = async () => {

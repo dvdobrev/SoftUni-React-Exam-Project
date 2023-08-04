@@ -48,10 +48,10 @@ export const CreatePlan = () => {
 
 
         const planDoc = await getDoc(planObject);
-        const planInfo = planDoc.data();
+        const newPlan = planDoc.data();
 
-        addPlan(planInfo);
-        addUserPlan(planInfo);
+        addPlan(newPlan);
+        addUserPlan(newPlan);
 
         navigate('/plansCatalog');
 

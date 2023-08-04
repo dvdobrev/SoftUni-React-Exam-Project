@@ -12,7 +12,7 @@ export const UserProvider = ({
     const [userData, setUserData] = useLocalStorage('userData', {});
     const ownerId = userData.uid;
 
-    console.log("From userContext: ownerId: " + ownerId);
+    console.log("ownerId: " + ownerId);
 
     const userDataHandler = (userData) => {
         setUserData(userData);

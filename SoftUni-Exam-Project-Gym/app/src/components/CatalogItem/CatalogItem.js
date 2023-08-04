@@ -21,7 +21,7 @@ export const CatalogItem = ({ plan }) => {
                 <h4>{plan.days} times per week</h4>
             </div>
 
-            <Link to={`/plans/${plan._id}/details`} className={`${catalogItemCSS["details-button"]}`}>
+            <Link to={`/plans/${plan.planId}/details`} className={`${catalogItemCSS["details-button"]}`}>
                 Details
             </Link>
 
