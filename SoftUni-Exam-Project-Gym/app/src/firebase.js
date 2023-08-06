@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
+//TODO: check edit plan, and check the creat comments logic
 
 //TODO: solve the problem with no sorting the plans as a stack - it is because of their saving row in firebase
 
@@ -17,6 +18,7 @@ import { getFirestore } from "firebase/firestore";
 
 //TODO: fix why added plans are not shown
 
+//TODO: Delete traininPlanServices and userService if dont need it
 
 
 // web app's Firebase configuration

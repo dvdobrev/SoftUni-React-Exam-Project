@@ -1,17 +1,22 @@
-import { useEffect, useState, useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { PlanContext } from "../../contexts/PlanContext";
 
-import * as planServices from '../../services/trainingPlanService';
-import detailsCSS from '../../imported-elements/css/details.module.css';
-import styles from '../../imported-elements/css/global-stayles.module.css'
-import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../firebase';
+import * as planServices from "../../services/trainingPlanService";
+import detailsCSS from "../../imported-elements/css/details.module.css";
+import styles from "../../imported-elements/css/global-stayles.module.css";
+import {
+    Firestore,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    query,
+    where,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
-
-export const PlanDetails = (
-) => {
-
+export const PlanDetails = () => {
     const [showConfirm, setShowConfirm] = useState(false);
     const { planId } = useParams();
     const [currentPlan, setCurrentPlan] = useState({});
@@ -22,14 +27,14 @@ export const PlanDetails = (
     const { ownerId, fetchAllPlans, fetchUserPlans } = useContext(PlanContext);
     const planOwnerId = currentPlan.ownerId;
 
-    const [username, setUsername] = useState('');
-    const [comment, setComment] = useState('');
+    const [username, setUsername] = useState("");
+    const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
 
     const [error, setError] = useState({
-        username: '',
-        comment: '',
-        emptyFiled: '',
+        username: "",
+        comment: "",
+        emptyFiled: "",
     });
 
     // useEffect(() => {
@@ -43,24 +48,8 @@ export const PlanDetails = (
     //         });
     // }, [planId, navigate]);
 
-
-    // useEffect(() => {
-    //     planServices.getOne(planId)
-    //         .then(result => {
-    //             setCurrentPlan(result)
-    //         })
-    //         .catch((error) => {
-    //             navigate(`/pageNotFound`)
-    //         });
-
-    // }, [planId, navigate]);
-
-
     useEffect(() => {
-
         const getPlan = async () => {
-            console.log("planId: " + planId);
-
             try {
                 const q = query(collection(db, "Plans"), where("planId", "==", planId));
                 const querySnapshot = await getDocs(q);
@@ -74,57 +63,85 @@ export const PlanDetails = (
         };
 
         getPlan();
-
     }, [planId, navigate]);
-
 
     const addCommentHandler = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
 
-        const username = formData.get('username');
-        const comment = formData.get('comment');
+        // const username = formData.get('username');
+        setUsername(formData.get("username"));
+
+        // const comment = formData.get('comment');
+        setComment(formData.get("comment"));
 
         const errors = validateFormData({ username, comment });
         let errorMessage;
 
-        if (Object.values(errors).some((message) => message !== '')) {
-            errorMessage = "Please enter a username and comment"
+        if (Object.values(errors).some((message) => message !== "")) {
+            errorMessage = "Please enter a username and comment";
 
-            setError(state => ({
+            setError((state) => ({
                 ...state,
-                emptyFiled: errorMessage
+                emptyFiled: errorMessage,
             }));
             return;
         } else {
-            setError(state => ({
+            setError((state) => ({
                 ...state,
-                emptyFiled: ""
+                emptyFiled: "",
             }));
         }
 
-        planServices
-            .createComment({ planId, username, comment })
-            .then((newComment) => {
-                setAllComments((prevComments) => [...prevComments, newComment]);
-                setUsername('');
-                setComment('');
+        // planServices
+        //     .createComment({ planId, username, comment })
+        //     .then((newComment) => {
+        //         setAllComments((prevComments) => [...prevComments, newComment]);
+        //         setUsername('');
+        //         setComment('');
+        //     })
+        //     .catch((error) => {
+        //         navigate(`/pageNotFound`);
+        //     });
+    };
+
+    const addComment = (planId, username, comment) => {
+        //Get a reference to the document with the specific planId
+        const planObject = Firestore.collection("Plans").doc(planId);
+        console.log(planObject);
+
+        //Create a new subcollection "Comments" inside the document with planId
+        const commentCollection = planObject.collection("Comments");
+
+        //Add a new document with the data "name: Pesho" and "comment: cool"
+        const newCommentData = {
+            username: username,
+            comment: comment,
+        };
+
+        // Add the new comment document to the "Comments" subcollection
+        commentCollection
+            .add(newCommentData)
+            .then((docRef) => {
+                console.log("New comment added with ID: ", docRef.id);
             })
             .catch((error) => {
-                navigate(`/pageNotFound`);
+                console.error("Error adding comment:", error);
             });
+
+        setAllComments((state) => [...state, newCommentData]);
     };
 
     const validateFormData = ({ username, comment }) => {
         const errors = {};
 
         if (!username || username.length < 2 || username.length > 10) {
-            errors.username = 'Username must be between 4 and 10 characters';
+            errors.username = "Username must be between 4 and 10 characters";
         }
 
         if (!comment || comment.length < 2 || comment.length > 20) {
-            errors.comment = 'The comment must be between than 2 and 20 characters';
+            errors.comment = "The comment must be between than 2 and 20 characters";
         }
 
         return errors;
@@ -146,7 +163,7 @@ export const PlanDetails = (
         let errorMessage;
 
         if (!comment || comment.length < 2 || comment.length > 20) {
-            errorMessage = 'The comment must be between than 2 and 20 characters';
+            errorMessage = "The comment must be between than 2 and 20 characters";
         }
 
         setError((state) => ({
@@ -159,7 +176,7 @@ export const PlanDetails = (
         let errorMessage;
 
         if (!username || username.length < 2 || username.length > 10) {
-            errorMessage = 'Username must be between 4 and 10 characters';
+            errorMessage = "Username must be between 4 and 10 characters";
         }
 
         setError((state) => ({
@@ -176,85 +193,89 @@ export const PlanDetails = (
         setShowConfirm(false);
     };
 
-    // const deletePlanHandler = () => {
-    //     planServices.deleteOne(planId)
-    //         .then(() => {
-    //             fetchallPlans();
-    //             fetchUserPlans(ownerId);
-    //             setShowConfirm(false);
-    //             navigate(`/myPlans`);
-    //         });
-    // };
-
-    //TODO: get the document id to delete it
     const deletePlanHandler = async () => {
-        await deleteDoc(doc(db, "Plans",  dokumentId));
-        fetchAllPlans()
-        fetchUserPlans()
+        await deleteDoc(doc(db, "Plans", dokumentId));
+        fetchAllPlans();
+        fetchUserPlans();
+        setShowConfirm(false);
         navigate(`/myPlans`);
-
     };
 
     return (
         <section className={`${detailsCSS["details-section"]}`}>
-
             <h1 className={detailsCSS["plan-details-title"]}>Plan Details</h1>
             <div className={`${detailsCSS["plan-details-container"]}`}>
                 <div className={detailsCSS["plan-details-info"]}>
-                    <h2>Level:
-                        <span className={detailsCSS["plan-details-day"]}>{currentPlan.level}</span>
+                    <h2>
+                        Level:
+                        <span className={detailsCSS["plan-details-day"]}>
+                            {currentPlan.level}
+                        </span>
                     </h2>
-                    <h2>Days per week:
-                        <span className={detailsCSS["plan-details-time"]}>{currentPlan.days}
+                    <h2>
+                        Days per week:
+                        <span className={detailsCSS["plan-details-time"]}>
+                            {currentPlan.days}
                         </span>
                     </h2>
 
                     <h2>Description: </h2>
 
                     <div>
-                        <span className={detailsCSS["plan-details-muscle"]}>{currentPlan.description}
+                        <span className={detailsCSS["plan-details-muscle"]}>
+                            {currentPlan.description}
                         </span>
-
                     </div>
                 </div>
                 <div className={detailsCSS["plan-details-comments"]}>
                     <h2>Comments:</h2>
                     <ul className={detailsCSS["plan-details-comments-list"]}>
-                        {allComments?.map(comment => (
-                            <li key={comment._id} className={detailsCSS["plan-details-comment"]}>
-                                <p>{comment.username}: {comment.comment}</p>
+                        {allComments?.map((comment) => (
+                            <li
+                                key={comment._id}
+                                className={detailsCSS["plan-details-comment"]}
+                            >
+                                <p>
+                                    {comment.username}: {comment.comment}
+                                </p>
                             </li>
                         ))}
 
-                        {allComments.length === 0
-                            ? <p className={detailsCSS["no-comment"]}>No comments yet.</p>
-                            : ""
-                        }
+                        {allComments.length === 0 ? (
+                            <p className={detailsCSS["no-comment"]}>No comments yet.</p>
+                        ) : (
+                            ""
+                        )}
                     </ul>
-
                 </div>
-                {ownerId === planOwnerId &&
+                {ownerId === planOwnerId && (
                     <div className={detailsCSS["plan-details-buttons"]}>
                         <Link to={`/plans/${planId}/edit`} className={styles["buttons"]}>
                             Edit
                         </Link>
-                        <button onClick={confirmDeleteHandler} className={styles["buttons"]}>
+                        <button
+                            onClick={confirmDeleteHandler}
+                            className={styles["buttons"]}
+                        >
                             Delete
                         </button>
-                    </div>}
-
+                    </div>
+                )}
 
                 {showConfirm && (
-                    <div className={`${detailsCSS["confirm-message"]} ${detailsCSS["h2"]}`}>
-                        <h2 className={detailsCSS["h2"]}>Are you sure you want to delete this plan?</h2>
+                    <div
+                        className={`${detailsCSS["confirm-message"]} ${detailsCSS["h2"]}`}
+                    >
+                        <h2 className={detailsCSS["h2"]}>
+                            Are you sure you want to delete this plan?
+                        </h2>
                         <button onClick={cancelDeleteHandler}>Cancel</button>
                         <button onClick={deletePlanHandler}>Delete</button>
                     </div>
                 )}
             </div>
 
-
-            {ownerId &&
+            {ownerId && (
                 <article className={detailsCSS["create-comment"]}>
                     <label>Add new comment:</label>
                     <form className={detailsCSS["form"]} onSubmit={addCommentHandler}>
@@ -267,7 +288,9 @@ export const PlanDetails = (
                                 onChange={onChangeUsername}
                             />
 
-                            {error.username && <div style={{ color: 'red' }}>{error.username}</div>}
+                            {error.username && (
+                                <div style={{ color: "red" }}>{error.username}</div>
+                            )}
                         </div>
 
                         <div className={detailsCSS["comment-div"]}>
@@ -278,7 +301,9 @@ export const PlanDetails = (
                                 onChange={onChangeComment}
                             />
 
-                            {error.comment && <div style={{ color: 'red' }}>{error.comment}</div>}
+                            {error.comment && (
+                                <div style={{ color: "red" }}>{error.comment}</div>
+                            )}
                         </div>
 
                         <div className={detailsCSS["submit-div"]}>
@@ -288,11 +313,13 @@ export const PlanDetails = (
                                 value="Add Comment"
                             />
 
-                            {error.emptyFiled && <div style={{ color: 'red' }}>{error.emptyFiled}</div>}
+                            {error.emptyFiled && (
+                                <div style={{ color: "red" }}>{error.emptyFiled}</div>
+                            )}
                         </div>
                     </form>
                 </article>
-            }
+            )}
         </section>
     );
 };

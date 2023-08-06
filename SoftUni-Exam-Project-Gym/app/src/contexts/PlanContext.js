@@ -63,8 +63,6 @@ export const PlanProvider = ({
         }
     };
 
-
-
     const addPlan = (planData) => {
         setTrainingPlans(state => [
             ...state,

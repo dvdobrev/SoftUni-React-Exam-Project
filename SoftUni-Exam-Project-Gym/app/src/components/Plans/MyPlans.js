@@ -17,7 +17,7 @@ export const MyPlans = () => {
 
             <div className={catalogCSS["card-container"]}>
                 {userPlans.length > 0
-                    ? userPlans.map(plan => <CatalogItem key={plan._id} plan={plan} />)
+                    ? userPlans.map(plan => <CatalogItem key={plan.planId} plan={plan} />)
                     : <h3>No plans yet</h3>
                 }
             </div>

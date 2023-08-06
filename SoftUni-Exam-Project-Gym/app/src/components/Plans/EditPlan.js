@@ -3,15 +3,17 @@ import { PlanContext } from "../../contexts/PlanContext";
 
 import { useParams, useNavigate } from 'react-router-dom';
 
-import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css';
+import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { db } from "../../firebase";
 
 
 export const EditPlan = () => {
 
     const [currentPlan, setCurrentPlan] = useState({});
-    const { editPlan } = useContext(PlanContext);
+    const [firebaseDokumentId, setFirebaseDokumentId] = useState("");
+    const { fetchAllPlans, fetchUserPlans } = useContext(PlanContext);
     const { planId } = useParams();
     const navigate = useNavigate();
 
@@ -21,24 +23,47 @@ export const EditPlan = () => {
     });
 
     useEffect(() => {
-        planServices.getOne(planId)
-            .then(planData => {
-                setCurrentPlan(planData);
-            })
-    }, [])
 
-    const onSubmit = (e) => {
+        const getPlan = async () => {
+
+            try {
+                const q = query(collection(db, "Plans"), where("planId", "==", planId));
+                const querySnapshot = await getDocs(q);
+                const searchedPlan = querySnapshot.docs.map((doc) => doc.data())[0];
+                const dokId = querySnapshot.docs[0].id;
+                setCurrentPlan(searchedPlan);
+                setFirebaseDokumentId(dokId);
+            } catch (error) {
+                console.error("Error fetching user plans:", error);
+            }
+        };
+
+        getPlan();
+
+    }, [planId, navigate]);
+
+
+    const onSubmit = async (e) => {
         e.preventDefault();
 
-        const planData = Object.fromEntries(new FormData(e.target));
+        const seachedPlanRef = doc(db, "Plans", firebaseDokumentId);
 
-        planServices.edit(planId, planData)
-            .then(result => {
-                editPlan(planId, result);
-                navigate(`/myPlans`)
-            }).catch((error) => {
-                navigate(`/pageNotFound`)
+        try {
+            const planData = Object.fromEntries(new FormData(e.target));
+
+            await updateDoc(seachedPlanRef, {
+                level: planData.level,
+                days: planData.days,
+                description: planData.description,
             });
+
+            await fetchAllPlans();
+            await fetchUserPlans();
+            navigate(`/myPlans`);
+        } catch (error) {
+            console.error("Error saving the plan:", error);
+            navigate(`/pageNotFound`);
+        }
     };
 
     const isDigitValidation = (e) => {
