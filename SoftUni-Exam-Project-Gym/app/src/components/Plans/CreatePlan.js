@@ -1,14 +1,13 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlanContext } from "../../contexts/PlanContext";
-import * as planServices from '../../services/trainingPlanService';
 import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css'
 
 import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { UserContext } from '../../contexts/UserContext';
-import { RandomStringGenerator } from '../../helpers/RandomId';
+import { randomStringGenerator } from '../../helpers/RandomId';
 
 
 export const CreatePlan = () => {
@@ -16,7 +15,9 @@ export const CreatePlan = () => {
     const { userData } = useContext(UserContext)
     const ownerId = userData.uid;
 
-    let planId = RandomStringGenerator();
+
+    let planId = randomStringGenerator();
+    let documentId = randomStringGenerator();
 
     const navigate = useNavigate();
 
@@ -37,21 +38,19 @@ export const CreatePlan = () => {
             return;
         }
 
-        const planObject = await addDoc(collection(db, "Plans"), {
+        const data = {
             ownerId: ownerId,
             level: planData.level,
             days: planData.days,
             description: planData.description,
             planId: planId,
             timeStamp: serverTimestamp(),
-        });
+        }
 
+        await setDoc(doc(db, "Plans", documentId), data);
 
-        const planDoc = await getDoc(planObject);
-        const newPlan = planDoc.data();
-
-        addPlan(newPlan);
-        addUserPlan(newPlan);
+        addPlan(data);
+        addUserPlan(data);
 
         navigate('/plansCatalog');
 

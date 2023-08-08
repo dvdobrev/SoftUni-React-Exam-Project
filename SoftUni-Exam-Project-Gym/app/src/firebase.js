@@ -3,20 +3,16 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
-//TODO: check edit plan, and check the creat comments logic
+//TODO: check the commetns sortigin and ornerign
 
 //TODO: solve the problem with no sorting the plans as a stack - it is because of their saving row in firebase
 
 //TODO: make the apiKey in .env - now it comes
 // with error thast why i use the key directly
 
-//TODO: delete the all console.log, especially in the register form
-
 //TODO: delete all comments and unnecessary code
 
 //TODO: add logik after register the user to be directly logged in
-
-//TODO: fix why added plans are not shown
 
 //TODO: Delete traininPlanServices and userService if dont need it
 

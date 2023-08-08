@@ -2,19 +2,24 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { PlanContext } from "../../contexts/PlanContext";
 
-import * as planServices from "../../services/trainingPlanService";
+import * as planServices from "../../services/planService";
 import detailsCSS from "../../imported-elements/css/details.module.css";
 import styles from "../../imported-elements/css/global-stayles.module.css";
 import {
     Firestore,
+    addDoc,
     collection,
     deleteDoc,
     doc,
     getDocs,
     query,
+    serverTimestamp,
+    setDoc,
     where,
+    writeBatch,
 } from "firebase/firestore";
 import { db } from "../../firebase";
+import { randomStringGenerator } from "../../helpers/RandomId";
 
 export const PlanDetails = () => {
     const [showConfirm, setShowConfirm] = useState(false);
@@ -30,23 +35,13 @@ export const PlanDetails = () => {
     const [username, setUsername] = useState("");
     const [comment, setComment] = useState("");
     const [allComments, setAllComments] = useState([]);
+    const [commentId, setCommentId] = useState('');
 
     const [error, setError] = useState({
         username: "",
         comment: "",
         emptyFiled: "",
     });
-
-    // useEffect(() => {
-    //     planServices.getAllComments()
-    //         .then(plans => plans.filter(plan => plan.planId === planId))
-    //         .then(filteredComments => {
-    //             setAllComments(filteredComments);
-    //         })
-    //         .catch((error) => {
-    //             navigate("/PageNotFound");
-    //         });
-    // }, [planId, navigate]);
 
     useEffect(() => {
         const getPlan = async () => {
@@ -56,6 +51,10 @@ export const PlanDetails = () => {
                 const searchedPlan = querySnapshot.docs.map((doc) => doc.data())[0];
                 const dokId = querySnapshot.docs[0].id;
                 setCurrentPlan(searchedPlan);
+
+                const commentsArray = await getAllComments(planId);
+                commentsArray.sort((a, b) => a.timeStamp - b.timeStamp);                
+                setAllComments(commentsArray);
                 setDokumentId(dokId);
             } catch (error) {
                 console.error("Error fetching user plans:", error);
@@ -67,6 +66,8 @@ export const PlanDetails = () => {
 
     const addCommentHandler = (e) => {
         e.preventDefault();
+
+        setCommentId(randomStringGenerator());
 
         const formData = new FormData(e.target);
 
@@ -94,44 +95,60 @@ export const PlanDetails = () => {
             }));
         }
 
-        // planServices
-        //     .createComment({ planId, username, comment })
-        //     .then((newComment) => {
-        //         setAllComments((prevComments) => [...prevComments, newComment]);
-        //         setUsername('');
-        //         setComment('');
-        //     })
-        //     .catch((error) => {
-        //         navigate(`/pageNotFound`);
-        //     });
+        addComment(planId, username, comment)
+
     };
 
-    const addComment = (planId, username, comment) => {
-        //Get a reference to the document with the specific planId
-        const planObject = Firestore.collection("Plans").doc(planId);
-        console.log(planObject);
+    const getAllComments = async (planId) => {
+        const commentsRef = collection(db, "planComments" + planId);
+        const querySnapshot = await getDocs(commentsRef);
 
-        //Create a new subcollection "Comments" inside the document with planId
-        const commentCollection = planObject.collection("Comments");
+        const commentsArray = [];
+        querySnapshot.forEach((doc) => {
+            commentsArray.push(doc.data());
+        });
 
-        //Add a new document with the data "name: Pesho" and "comment: cool"
-        const newCommentData = {
+        return commentsArray;
+    };
+
+    const addComment = async (planId, username, comment) => {
+
+        const planPath = collection(db, "planComments" + planId);
+        const planColleciton = await getDocs(planPath);
+        let existPlan = planColleciton.empty;
+
+        const commentData = {
             username: username,
             comment: comment,
-        };
+            id: randomStringGenerator(),
+            timeStamp: serverTimestamp()
+        }
 
-        // Add the new comment document to the "Comments" subcollection
-        commentCollection
-            .add(newCommentData)
-            .then((docRef) => {
-                console.log("New comment added with ID: ", docRef.id);
-            })
-            .catch((error) => {
-                console.error("Error adding comment:", error);
-            });
+        if (!existPlan) {
+            const newDocRef = doc(db, "planComments" + planId, randomStringGenerator());
+            await setDoc(newDocRef, commentData);
+        } else {
+            const newDocRef = doc(planPath, randomStringGenerator());
+            await setDoc(newDocRef, commentData);
+        }
 
-        setAllComments((state) => [...state, newCommentData]);
+
+        setAllComments((prevComments) => [...prevComments, commentData]);
+        setUsername("");
+        setComment("");
+
+        await navigate("/plans/" + planId + "/details")
     };
+
+    const deleteCollection = async (collectionRef) => {
+        const querySnapshot = await getDocs(collectionRef);
+
+        // Delete each document within the collection
+        querySnapshot.forEach((doc) => {
+            deleteDoc(doc.ref);
+        });
+    };
+
 
     const validateFormData = ({ username, comment }) => {
         const errors = {};
@@ -195,6 +212,7 @@ export const PlanDetails = () => {
 
     const deletePlanHandler = async () => {
         await deleteDoc(doc(db, "Plans", dokumentId));
+        deleteCollection(collection(db, "planComments" + planId));
         fetchAllPlans();
         fetchUserPlans();
         setShowConfirm(false);
@@ -232,7 +250,7 @@ export const PlanDetails = () => {
                     <ul className={detailsCSS["plan-details-comments-list"]}>
                         {allComments?.map((comment) => (
                             <li
-                                key={comment._id}
+                                key={comment.id}
                                 className={detailsCSS["plan-details-comment"]}
                             >
                                 <p>

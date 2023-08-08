@@ -14,17 +14,10 @@ export const Header = () => {
 
     const { userData } = useContext(UserContext)
 
-    if (userData == undefined) {
-        console.log("No user data");
-    } else {
-        console.log(userData.user);
-    }
-
-
     return (
 
         <header className={`${headerCSS["header-area"]} ${headerCSS["header-sticky"]}`}>
-
+                <h1>Hi Dobri</h1>
             <div>
                 {/* <div className={styles["container"]}> */}
 

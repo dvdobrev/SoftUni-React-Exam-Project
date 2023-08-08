@@ -28,9 +28,6 @@ export const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    console.log("Email: " + email);
-    console.log("Password: " + password);
-
     // const [password, setPassword] = useState({
     //     password: '',
     //     repeatPassowrd: ''
@@ -57,7 +54,6 @@ export const Register = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log("User: " + user);
                 navigate("/");
 
             })

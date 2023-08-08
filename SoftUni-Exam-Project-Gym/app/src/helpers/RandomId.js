@@ -11,7 +11,7 @@ function generateRandomString() {
     return randomString;
 }
 
-export function RandomStringGenerator() {
+export function randomStringGenerator() {
     const randomString = generateRandomString();
     
     return randomString

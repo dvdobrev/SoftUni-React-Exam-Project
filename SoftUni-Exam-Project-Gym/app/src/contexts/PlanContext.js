@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as traingPlanService from '../services/trainingPlanService';
+import * as traingPlanService from '../services/planService';
 import { UserContext } from "./UserContext";
 
 import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
@@ -48,6 +48,8 @@ export const PlanProvider = ({
         querySnapshot.forEach((doc) => {
             list.push(doc.data());
         });
+        list.sort((a, b) => a.timeStamp - b.timeStamp);                
+
         setTrainingPlans(list);
     };
 
@@ -56,7 +58,8 @@ export const PlanProvider = ({
         try {
             const q = query(collection(db, "Plans"), where("ownerId", "==", ownerId));
             const querySnapshot = await getDocs(q);
-            const userList = querySnapshot.docs.map((doc) => doc.data());
+            let userList = querySnapshot.docs.map((doc) => doc.data());
+            userList.sort((a, b) => a.timeStamp - b.timeStamp);               
             setUserPlans(userList);
         } catch (error) {
             console.error("Error fetching user plans:", error);
