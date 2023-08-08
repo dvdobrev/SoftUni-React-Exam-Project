@@ -12,6 +12,7 @@ The users of the app can:
 -	Guest users can only view the plans of the other users as well details for each plan. But they can NOT edit, delete or comment any plan.
 -	Any user can send a message using the form in the contact link. After sending the message - the owner of the fitness will automatically receive an email from the sender including his data and his message. 
 -   If user is not logged in, and try to go to page like /myPlans, /createPlan, /logout, he will be redericted to the login page.
+-   (Users and plans/comments will be automatically deleted after 2 days to avoid spamming).
 
 # Technologies used in the project:
 -	React 18.2.0
@@ -21,17 +22,14 @@ The users of the app can:
 -	Emailjs-com 3.2.0
 
 # Used server for the project is:
-**SoftUni practice server** ( https://github.com/softuni-practice-server/softuni-practice-server#collections ) 
--	**NOTE:** CRUD operations for the collections use other links than those described in the server documentation:
-    -	http://localhost:3030/data/plans
-    -   http://localhost:3030/data/comments
+**Firebase Firestore** 
 
 # How to start it?
 -	Start terminal and install ***react*** (if not installed) from the client folder do ***npm install react***
 -	Start terminal and install ***react-router-dom*** (if not installed) from the client folder do ***npm install react-router-dom***
 -	Start terminal and install ***emailjs-com*** (if not installed) from the client folder do ***npm install emailjs-com***
+-	Start terminal from the root folder do ***firebase init functions***
 -	Start terminal from the client folder do ***npm start***
--	Start terminal from the server folder do ***node server.js***
 
 
 # Deployment
