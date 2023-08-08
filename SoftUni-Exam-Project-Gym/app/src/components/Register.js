@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import * as userServices from "../services/userServices";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 
@@ -27,11 +27,7 @@ export const Register = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    // const [password, setPassword] = useState({
-    //     password: '',
-    //     repeatPassowrd: ''
-    // });
+    const [repeatPassword, setRepeatPassword] = useState('');
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -51,33 +47,22 @@ export const Register = () => {
         // const lastName = formData.get('lastName');
 
         createUserWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                return signInWithEmailAndPassword(auth, email, password);
+            })
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                userDataHandler(user);
                 navigate("/");
-
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // ..
+                // Handle error
             });
 
 
-        // if (password !== repeatPassword) {
-        //     return;
-        // }
-
-        // userServices.register(email, password, firstName, lastName)
-        // .then(userData => {
-        //     userDataHandler(userData);
-        //     return userServices.saveUserData(firstName, lastName);
-        // })
-        // .then(() => {
-        //     navigate('/');
-        // }).catch((error) => {
-        //     navigate(`/pageNotFound`)
-        // });   
     }
 
     const firstnameValidation = (e) => {
@@ -123,51 +108,34 @@ export const Register = () => {
         }));
     };
 
-    // const passwordValidation = (e) => {
-    //     const password = e.target.value;
-    //     let errorMessage = '';
+    const passwordValidation = (e) => {
+        const password = e.target.value;
+        let errorMessage = '';
 
-    //     if (password.length < 6 || password.length > 20) {
-    //         errorMessage = 'The passowrd must be between 6 and 20 characters'
-    //     }
+        if (password.length < 6 || password.length > 20) {
+            errorMessage = 'The passowrd must be between 6 and 20 characters'
+        }
 
-    //     setError(state => ({
-    //         ...state,
-    //         passwordErrorMessage: errorMessage,
-    //     }));
+        setError(state => ({
+            ...state,
+            passwordErrorMessage: errorMessage,
+        }));
 
-    //     // setPassword(state => ({
-    //     //     ...state,
-    //     //     password: password
-    //     // }))
-    // }
+    }
 
-    // const repeatPasswordValidation = (e) => {
-    //     const repeatPassword = e.target.value;
-    //     let errorMessage = '';
+    const repeatPasswordValidation = (e) => {
+        const repeatPassword = e.target.value;
+        let errorMessage = '';
 
-    //     // setPassword(state => ({
-    //     //     ...state,
-    //     //     repeatPassowrd: repeatPassword
-    //     // }));
+        if (password !== repeatPassword) {
+            errorMessage = 'Passwords don\'t macht';
+        }
 
-    //     if (password.password === '') {
-    //         setPassword(state => ({
-    //             ...state,
-    //             password: '',
-    //         }));
-    //     }
-
-
-    //     if (password.password !== repeatPassword) {
-    //         errorMessage = 'Passwords don\'t macht';
-    //     }
-
-    //     setError(state => ({
-    //         ...state,
-    //         matchPasswordErrorMessage: errorMessage,
-    //     }));
-    // }
+        setError(state => ({
+            ...state,
+            matchPasswordErrorMessage: errorMessage,
+        }));
+    }
 
 
     return (
@@ -177,7 +145,7 @@ export const Register = () => {
 
             <form onSubmit={onSubmit} id={loginRegisterCSS["register-form"]}>
 
-                <div className="form-outline mb-0">
+                {/* <div className="form-outline mb-0">
                     <div className="form-outline">
 
                         <input
@@ -208,7 +176,7 @@ export const Register = () => {
                             <div style={{ color: 'white' }}>{error.lastnameErrorMessage}</div>
                         }
                     </div>
-                </div>
+                </div> */}
 
                 <div className="form-outline mb-0">
                     <div className="form-outline">
@@ -234,7 +202,7 @@ export const Register = () => {
                             name="password"
                             size={30}
                             placeholder="Password"
-                            // onBlur={passwordValidation}
+                            onBlur={passwordValidation}
                             onChange={e => setPassword(e.target.value)}
 
                         />
@@ -252,7 +220,8 @@ export const Register = () => {
                             name="repeatPassword"
                             size={30}
                             placeholder="Repeat Password"
-                            // onBlur={repeatPasswordValidation}
+                            onChange={e => setRepeatPassword(e.target.value)}
+                            onBlur={repeatPasswordValidation}
                         />
                         {error.matchPasswordErrorMessage &&
                             <div style={{ color: 'white' }}>{error.matchPasswordErrorMessage}</div>
