@@ -30,7 +30,6 @@ export const Login = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log(user);
                 userDataHandler(user);
                 navigate("/");
 
@@ -39,8 +38,6 @@ export const Login = () => {
                 setLoginError(true);
 
             });
-        console.log("Login Error: " + loginError);
-
 
         // const {
         //     email,
