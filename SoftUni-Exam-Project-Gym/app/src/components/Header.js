@@ -17,7 +17,6 @@ export const Header = () => {
     return (
 
         <header className={`${headerCSS["header-area"]} ${headerCSS["header-sticky"]}`}>
-                <h1>Hi Dobri</h1>
             <div>
                 {/* <div className={styles["container"]}> */}
 
