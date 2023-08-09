@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
-import * as userServices from "../services/userServices";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";

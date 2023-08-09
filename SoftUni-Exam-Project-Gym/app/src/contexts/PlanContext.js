@@ -1,13 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { createContext } from "react";
-import { useNavigate } from "react-router-dom";
 
-import * as traingPlanService from '../services/planService';
 import { UserContext } from "./UserContext";
 
-import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 
 export const PlanContext = createContext();
@@ -20,7 +17,6 @@ export const PlanProvider = ({
     const [trainingPlans, setTrainingPlans] = useState([]);
     const [userPlans, setUserPlans] = useState([]);
 
-    const navigate = useNavigate();
 
 
     useEffect(() => {

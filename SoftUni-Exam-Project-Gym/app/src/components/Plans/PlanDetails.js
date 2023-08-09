@@ -2,12 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { PlanContext } from "../../contexts/PlanContext";
 
-import * as planServices from "../../services/planService";
 import detailsCSS from "../../imported-elements/css/details.module.css";
 import styles from "../../imported-elements/css/global-stayles.module.css";
 import {
-    Firestore,
-    addDoc,
     collection,
     deleteDoc,
     doc,
@@ -16,7 +13,6 @@ import {
     serverTimestamp,
     setDoc,
     where,
-    writeBatch,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import { randomStringGenerator } from "../../helpers/RandomId";
