@@ -32,7 +32,7 @@ export const PlanProvider = ({
     useEffect(() => {
 
         fetchAllPlans();
-    }, [trainingPlans]);
+    }, []);
 
     const fetchAllPlans = async () => {
 
