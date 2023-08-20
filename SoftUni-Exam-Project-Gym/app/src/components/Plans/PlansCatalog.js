@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 import { CatalogItem } from "../CatalogItem/CatalogItem";
 import catalogCSS from '../../imported-elements/css/catalog.module.css';
@@ -10,6 +10,9 @@ export const PlansCatalog =  () => {
 
     const { trainingPlans } = useContext(PlanContext);
 
+    const memoizedTrainingPlans = useMemo(() => trainingPlans, [trainingPlans]);
+
+
     return (
 
         <section id={`${catalogCSS["catalog-page"]}`}>
@@ -17,8 +20,8 @@ export const PlansCatalog =  () => {
             <h1>All Plans</h1>
 
             <div className={catalogCSS["card-container"]}>
-                {trainingPlans.length > 0 ? (
-                    trainingPlans.map(plan => <CatalogItem key={plan.planId} plan={plan} />)
+                {memoizedTrainingPlans.length > 0 ? (
+                    memoizedTrainingPlans.map(plan => <CatalogItem key={plan.planId} plan={plan} />)
                 ) : (
                     <h3 className="no-articles">No plans yet</h3>
                 )}
