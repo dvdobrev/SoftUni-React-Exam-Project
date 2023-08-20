@@ -60,8 +60,6 @@ export const Register = () => {
                 const errorMessage = error.message;
                 // Handle error
             });
-
-
     }
 
     const firstnameValidation = (e) => {
