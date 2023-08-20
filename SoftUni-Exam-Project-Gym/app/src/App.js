@@ -13,7 +13,6 @@ import { Classes } from "./components/Classes";
 // import { Programs } from "./components/Programs";
 import { PlansCatalog } from './components/Plans/PlansCatalog';
 import { PageNotFound } from './components/PageNotFound';
-// import { Profil } from './components/Profil';
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
 import { Logout } from './components/Logout';
@@ -30,6 +29,8 @@ import { LoginGuard } from './routGuards/LoginGuard';
 import { PlanProvider } from './contexts/PlanContext';
 
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { Profile } from './components/Profil';
+import { EditProfile } from './components/EditProfile';
 
 
 
@@ -69,7 +70,8 @@ function App() {
                     <Routes>
                         <Route path="/plansCatalog" element={<PlansCatalog />} />
                         <Route path="/pageNotFound" element={<PageNotFound />} />
-                        {/* <Route path="/profil" element={<Profil userData={userData} />} /> */}
+                        <Route path="/profile" element={<Profile userData={userData} />} />
+                        <Route path="/profile/edit" element={<EditProfile />} />
 
                         <Route element={<RoutGuard />}>
                             <Route path="/myPlans" element={<MyPlans />} />

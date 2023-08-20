@@ -1,73 +1,87 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-import * as planServices from '../services/trainingPlanService';
-import *as userServices from '../services/userServices';
-import createPlanCSS from '../imported-elements/css/createPlan.module.css';
+import { getAuth, deleteUser } from "firebase/auth";
 
 
+import detailsCSS from "../imported-elements/css/details.module.css";
+import styles from "../imported-elements/css/global-stayles.module.css";
 
-export const Profil = () => {
-    const { userData } = useContext(UserContext);
+
+
+
+export const Profile = () => {
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+    console.log('user: ', user);
+
+    const { userData, logoutHandler } = useContext(UserContext);
+
+    const email = userData.email;
+
+    const [showConfirm, setShowConfirm] = useState(false);
+
+
     const navigate = useNavigate();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        const userData = Object.fromEntries(new FormData(e.target));
-
-        userServices.editUserData(userData)
-            .then(() => {
-                navigate(`/profil`)
-            });
+    const confirmDeleteHandler = () => {
+        setShowConfirm(true);
     };
+
+    const cancelDeleteHandler = () => {
+        setShowConfirm(false);
+    };
+
+    const deleteProfileHandler = async () => {
+
+        try {
+            await deleteUser(user);
+            setShowConfirm(false);
+            await logoutHandler();
+
+            navigate(`/`);
+        } catch (err) {
+            // navigate(`/pageNotFound`);
+        }
+
+    };
+
 
     return (
         <section>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <form id="edit" onSubmit={onSubmit}>
-                <div className={createPlanCSS["createPlan"]}>
-                    <h1>Edit Profil</h1>
-                    <label htmlFor="firstName">FirsName:
-                        <input
-                            type="text"
-                            name="firstName"
-                        defaultValue={userData.firstName}
-                        />
-                    </label>
 
-                    <label htmlFor="lastName">Last Name:
-                        <input
-                            type="text"
-                            name="lastName"
-                            defaultValue={userData.lastName}
-                        />
-                    </label>
+            <h1>Your Profile</h1>
 
-                    <label htmlFor="city">City:
-                        <input
-                            type="text"
-                            name="city"
-                            defaultValue={userData.email}
-                        />
-                    </label>
+            <div>
+                <p>{email}</p>
+            </div>
 
-                    
+            <Link to={`/profile/edit`} className={styles["buttons"]}>
+                Edit
+            </Link>
 
-                    <input
-                        className={createPlanCSS["submitBtn"]}
-                        type="submit"
-                        value="Edit Profile"
-                    />
+            <button
+                onClick={confirmDeleteHandler}
+                className={styles["buttons"]}
+            >
+                Delete
+            </button>
 
+            {showConfirm && (
+                <div
+                    className={`${detailsCSS["confirm-message"]} ${detailsCSS["h2"]}`}
+                >
+                    <h2 className={detailsCSS["h2"]}>
+                        Are you sure you want to delete your account?
+                    </h2>
+                    <button onClick={cancelDeleteHandler}>Cancel</button>
+                    <button onClick={deleteProfileHandler}>Delete</button>
                 </div>
-            </form>
+            )}
+
         </section>
     );
 }

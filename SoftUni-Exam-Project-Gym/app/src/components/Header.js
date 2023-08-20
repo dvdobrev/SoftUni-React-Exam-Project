@@ -48,7 +48,7 @@ export const Header = () => {
 
                                 {userData?.email
                                     ? <div className={headerCSS["header-user"]}>
-                                        {/* <li> <NavLink className={headerCSS["main-button"]} to="/profil">Profil</NavLink></li> */}
+                                        <li> <NavLink className={headerCSS["main-button"]} to="/profile">Profile</NavLink></li>
                                         <li> <NavLink className={styles["buttons"]} to="/logout">Logout</NavLink></li>
                                     </div>
                                     : <div className={headerCSS["header-user"]}>
