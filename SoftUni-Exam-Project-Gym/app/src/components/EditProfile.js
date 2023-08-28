@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 
 import { useNavigate } from 'react-router-dom';
 
-import createPlanCSS from '../imported-elements/css/createPlan.module.css';
+import createAndEditCSS from '../imported-elements/css/createAndEdit.module.css';
 import styles from '../imported-elements/css/global-stayles.module.css';
 
 import { UserContext } from "../contexts/UserContext";
@@ -67,10 +67,10 @@ export const EditProfile = () => {
 
 
     return (
-        <section className={`${createPlanCSS["createPlanSection"]}`}>
+        <section className={`${createAndEditCSS["createPlanSection"]}`}>
             <h1>Edit Profile</h1>
-            <form onSubmit={onSubmit} id={createPlanCSS["create-plan-form"]}>
-                <div className={createPlanCSS["createPlan"]}>
+            <form onSubmit={onSubmit} id={createAndEditCSS["create-plan-form"]}>
+                <div className={createAndEditCSS["createPlan"]}>
 
                     <label htmlFor="email">Email:
                         <input
@@ -91,7 +91,7 @@ export const EditProfile = () => {
 
                 </div>
 
-                <div className={createPlanCSS["submit-div"]}>
+                <div className={createAndEditCSS["submit-div"]}>
                     <input
                         className={styles["buttons"]}
                         type="submit"

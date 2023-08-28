@@ -3,7 +3,7 @@ import { PlanContext } from "../../contexts/PlanContext";
 
 import { useParams, useNavigate } from 'react-router-dom';
 
-import createPlanCSS from '../../imported-elements/css/createPlan.module.css';
+import createAndEditCSS from '../../imported-elements/css/createAndEdit.module.css';
 import styles from '../../imported-elements/css/global-stayles.module.css';
 import { collection, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -109,10 +109,10 @@ export const EditPlan = () => {
 
 
     return (
-        <section className={`${createPlanCSS["createPlanSection"]}`}>
+        <section className={`${createAndEditCSS["createPlanSection"]}`}>
             <h1>Edit Plan</h1>
-            <form onSubmit={onSubmit} id={createPlanCSS["create-plan-form"]}>
-                <div className={createPlanCSS["createPlan"]}>
+            <form onSubmit={onSubmit} id={createAndEditCSS["create-plan-form"]}>
+                <div className={createAndEditCSS["createPlan"]}>
                     <label htmlFor="level">
                         Level:
                         <select id="tag" name="level" defaultValue="" required>
@@ -150,7 +150,7 @@ export const EditPlan = () => {
                     </label>
                 </div>
 
-                <div className={createPlanCSS["submit-div"]}>
+                <div className={createAndEditCSS["submit-div"]}>
                     <input
                         className={styles["buttons"]}
                         type="submit"
