@@ -1,5 +1,5 @@
 .logo {
-    padding-left: 36px;
+    padding-left: 20px;
 }
 
 #welcomeSpan {
@@ -117,6 +117,12 @@
     letter-spacing: 1px;
 }
 
+.header-area .main-nav .nav li {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+
 .header-area .main-nav .nav li a {
     color: #fff;
 }
@@ -125,6 +131,7 @@
 .header-area .main-nav .nav li a.active {
     color: #ed563b;
     opacity: 1;
+    font-size: 4vh;
 }
 
 .header-user li a {

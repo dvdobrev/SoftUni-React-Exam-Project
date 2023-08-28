@@ -53,7 +53,6 @@ export const Header = () => {
                                     : ""
                                 }
 
-
                                 {userData?.email
                                     ? <div className={headerCSS["header-user"]}>
                                         <li> <NavLink className={styles["buttons"]} to="/logout">Logout</NavLink></li>
