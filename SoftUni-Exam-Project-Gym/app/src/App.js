@@ -70,13 +70,15 @@ function App() {
                     <Routes>
                         <Route path="/plansCatalog" element={<PlansCatalog />} />
                         <Route path="/pageNotFound" element={<PageNotFound />} />
-                        <Route path="/profile" element={<Profile userData={userData} />} />
-                        <Route path="/profile/edit" element={<EditProfile />} />
+                        {/* <Route path="/profile" element={<Profile userData={userData} />} />
+                        <Route path="/profile/edit" element={<EditProfile />} /> */}
 
                         <Route element={<RoutGuard />}>
                             <Route path="/myPlans" element={<MyPlans />} />
                             <Route path="/createPlan" element={<CreatePlan />} />
                             <Route path="/plans/:planId/edit" element={<EditPlan />} />
+                            <Route path="/profile" element={<Profile userData={userData} />} />
+                            <Route path="/profile/edit" element={<EditProfile />} />
                         </Route>
 
                         <Route path="/plans/:planId/details" element={<PlanDetails />} />
