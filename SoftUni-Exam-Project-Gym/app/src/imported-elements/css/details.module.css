@@ -124,6 +124,7 @@
     width: 80%;
     max-width: 500px;
 }
+
 .comment-div,
 .comment-div input[type="text"],
 .comment-div textarea {
@@ -186,4 +187,24 @@
     cursor: pointer;
     background-color: #333;
     color: #fff;
+}
+
+/* ---------------PROFILE--------------- */
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* height: 100vh; */
+    background-image: url(../images/createPlan.jpg);
+}
+
+.profile-h1 {
+    color: white;
+}
+
+.profile-info p {
+    color: yellow;
+    font-size: 1.8rem;
 }

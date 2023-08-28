@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { getAuth, deleteUser } from "firebase/auth";
 
+import createAndEditCSS from '../imported-elements/css/createAndEdit.module.css';
 
 import detailsCSS from "../imported-elements/css/details.module.css";
 import styles from "../imported-elements/css/global-stayles.module.css";
@@ -51,24 +52,29 @@ export const Profile = () => {
 
 
     return (
-        <section>
+        <section className={`${detailsCSS["profile-section"]}`}>
 
-            <h1>Your Profile</h1>
+            <h1 className={`${detailsCSS["profile-h1"]}`}>
+                Your Profile
+            </h1>
 
-            <div>
+            <div className={detailsCSS["profile-info"]}>
                 <p>{email}</p>
             </div>
 
-            <Link to={`/profile/edit`} className={styles["buttons"]}>
-                Edit
-            </Link>
+            <div className={detailsCSS["plan-details-buttons"]}>
 
-            <button
-                onClick={confirmDeleteHandler}
-                className={styles["buttons"]}
-            >
-                Delete
-            </button>
+                <Link to={`/profile/edit`} className={styles["buttons"]}>
+                    Edit
+                </Link>
+
+                <button
+                    onClick={confirmDeleteHandler}
+                    className={styles["buttons"]}
+                >
+                    Delete
+                </button>
+            </div>
 
             {showConfirm && (
                 <div
