@@ -1,5 +1,5 @@
+
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
 
 import { UserProvider } from './contexts/UserContext';
 
