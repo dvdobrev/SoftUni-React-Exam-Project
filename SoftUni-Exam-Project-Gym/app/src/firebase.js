@@ -3,23 +3,14 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
-//TODO: check the commetns sortigin and ornerign
-
-//TODO: solve the problem with no sorting the plans as a stack - it is because of their saving row in firebase
 
 //TODO: make the apiKey in .env - now it comes
 // with error thast why i use the key directly
 
-//TODO: delete all comments and unnecessary code
-
-//TODO: add logik after register the user to be directly logged in
-
-//TODO: Delete traininPlanServices and userService if dont need it
-
 
 // web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyC80rpwInIVmWf7gRHOfj3jQ6hxO3cAqcw",
+    apiKey: 'AIzaSyC80rpwInIVmWf7gRHOfj3jQ6hxO3cAqcw',
     authDomain: "project-gym-dobrin-dobrev.firebaseapp.com",
     databaseURL: "https://project-gym-dobrin-dobrev-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "project-gym-dobrin-dobrev",

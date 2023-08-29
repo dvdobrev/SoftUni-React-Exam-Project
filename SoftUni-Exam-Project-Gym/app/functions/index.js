@@ -43,7 +43,7 @@ exports.deleteInactiveUsers = functions.pubsub
     .schedule("every 24 hours")
     .timeZone("Europe/Berlin")
     .onRun(async (context) => {
-      const cutoffDays = 2; // Number of days before cutoff
+      const cutoffDays = 1; // Number of days before cutoff
       const currentDate = new Date();
       const cutoffDate = new Date(currentDate);
       cutoffDate.setDate(currentDate.getDate() - cutoffDays);
@@ -67,3 +67,29 @@ exports.deleteInactiveUsers = functions.pubsub
 
       return null;
     });
+
+
+exports.deleteAllCollections = functions.pubsub
+    .schedule("every 2 days")
+    .timeZone("Europe/Berlin")
+    .onRun(async (context) => {
+      const firestore = admin.firestore();
+      const collections = await firestore.listCollections();
+
+      const deletePromises = [];
+
+      collections.forEach((collection) => {
+        deletePromises.push(collection.listDocuments().then((documents) => {
+          documents.forEach((doc) => {
+            doc.delete().catch((error) => {
+              console.error(`Error deleting document ${doc.id} in collection ${collection.id}:`, error);
+            });
+          });
+        }));
+      });
+
+      await Promise.all(deletePromises);
+
+      return null;
+    });
+

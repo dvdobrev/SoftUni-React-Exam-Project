@@ -33,8 +33,9 @@ import { Profile } from './components/Profil';
 import { EditProfile } from './components/EditProfile';
 
 
-
 function App() {
+
+    console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 
     // useEffect(() => {
     //     // Clear local storage on component mount
