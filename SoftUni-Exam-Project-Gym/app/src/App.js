@@ -40,8 +40,6 @@ function App() {
 
     const [userData, setUserData] = useLocalStorage('userData', {});
 
-
-
     return (
 
         <UserProvider>
