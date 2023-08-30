@@ -5,8 +5,13 @@ The users of the app can:
 -	Register
 -	Log in
 -	Log out
+-	Show profile details
+-	Edit profile 
+-	Delete profile 
 -	View information about the fitness studio
 -	View training plans of other customers
+-	Create / Edit / Delete training plans
+-	Create comments
 
 -	Logged in users can share/post their own training plan. They can edit and delete only their own plans. But they can comment the plans of the others.
 -	Guest users can only view the plans of the other users as well details for each plan. But they can NOT edit, delete or comment any plan.
@@ -20,15 +25,20 @@ The users of the app can:
 -	Bootstrap
 -	Font Awesome
 -	Emailjs-com 3.2.0
+-	Firebase / Firestore
+
+
 
 # Used server for the project is:
 **Firebase Firestore** 
 
 # How to start it?
--	Start terminal and install ***react*** (if not installed) from the client folder do ***npm install react***
--	Start terminal and install ***react-router-dom*** (if not installed) from the client folder do ***npm install react-router-dom***
--	Start terminal and install ***emailjs-com*** (if not installed) from the client folder do ***npm install emailjs-com***
--	Start terminal from the root folder do ***firebase init functions***
+-	Start terminal and install ***react*** (if not installed) from the app folder do ***npm install react***
+-	Start terminal and install ***react-router-dom*** (if not installed) from the app folder do ***npm install react-router-dom***
+-	Start terminal and install ***emailjs-com*** (if not installed) from the app folder do ***npm install emailjs-com***
+-	Start terminal from the app folder do ***npm install -g firebase-tools***
+-	Start terminal from the root folder do ***firebase init***
+-	Start terminal from the root folder do ***firebase init***
 -	Start terminal from the client folder do ***npm start***
 
 
