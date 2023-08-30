@@ -10,7 +10,7 @@ import { getFirestore } from "firebase/firestore";
 
 // web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyC80rpwInIVmWf7gRHOfj3jQ6hxO3cAqcw',
+    apiKey: process.env.REACT_APP_FIREBASE_KEY,
     authDomain: "project-gym-dobrin-dobrev.firebaseapp.com",
     databaseURL: "https://project-gym-dobrin-dobrev-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "project-gym-dobrin-dobrev",
