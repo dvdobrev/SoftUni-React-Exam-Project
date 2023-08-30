@@ -2,12 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-
-
-//TODO: make the apiKey in .env - now it comes
-// with error thast why i use the key directly
-
-
 // web app's Firebase configuration
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_KEY,
