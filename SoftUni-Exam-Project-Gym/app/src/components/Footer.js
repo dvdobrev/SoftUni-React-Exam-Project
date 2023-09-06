@@ -8,7 +8,7 @@ export const Footer = () => {
             <div className ={ `${["p"]}`}>
                 <div className ="row">
                     <div className ="col-lg-12">
-                        <p>Made by Dobrin Dobrev for the SoftUni exam</p>
+                        <p>Mit Liebe und Leidenschaft gemacht von Dobrin Dobrev</p>
                                                 
                     </div>
                 </div>
