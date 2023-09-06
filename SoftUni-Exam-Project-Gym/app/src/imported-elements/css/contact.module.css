@@ -3,9 +3,9 @@
 }
 
 #contact-us {
-    margin-top: 98px;
-    height: 88vh;
-
+    background-image: url(../images/contact-bg.jpg);
+    /* margin-top: 98px; */
+    height: 100%;
 }
 
 #contact-us .container-fluid .col-lg-6 {
@@ -14,7 +14,7 @@
 
 #contact-us .contact-form {
     padding: 80px;
-    background-image: url(../images/contact-bg.jpg);
+    /* background-image: url(../images/contact-bg.jpg); */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -23,7 +23,20 @@
 #contact-us .contact-form #contact {
     background-color: #fff;
     padding: 40px;
+    margin-top: 10vh;
     border-radius: 5px;
+}
+
+#m {
+    display: flex;
+    justify-content: center;
+}
+
+iframe {
+    /* background-color: red; */
+    height: 79vh;
+    margin-top: 24vh;
+    margin-left: 2vw;
 }
 
 .contact-form input,

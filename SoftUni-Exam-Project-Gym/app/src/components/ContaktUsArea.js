@@ -61,7 +61,7 @@ export const ContakUsArea = () => {
         <section className={contactCSS["section"]} id={contactCSS["contact-us"]}>
             <div className={contactCSS["container-fluid"]}>
                 <div className="row">
-                    <div className="col-lg-6 col-md-6 col-xs-12">
+                    <div className="col-lg-6 col-md-6 col-xs-12"> 
                         <div id={contactCSS["map"]}>
                             <iframe
                                 title="maps"
@@ -130,8 +130,8 @@ export const ContakUsArea = () => {
                                             </textarea>
                                         </fieldset>
                                     </div>
-                                    <div className="col-lg-12">
-                                        <fieldset>
+                                    <div className="col-lg-12 d-flex justify-content-center">
+                                        <fieldset id="m">
                                             <button
                                                 type="submit"
                                                 id={contactCSS["form-submit"]}
